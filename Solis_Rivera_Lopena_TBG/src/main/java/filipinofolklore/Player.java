@@ -22,19 +22,19 @@ public class Player {
     public void initWeapons() {
         //Default weapon
         equipped = new Weapon("Stick", 5, 20, 10);
-        
+
         //Woods weapon
         Weapon Balisong = new Weapon("Balisong", 15, 30, 10);
         Weapon BoloKnife = new Weapon("Bolo Knife", 20, 50, -5);
         woodsWeapon.add(BoloKnife);
         woodsWeapon.add(Balisong);
-        
+
         //Swamp weapon
         Weapon StandIn1 = new Weapon("Placeholder1", 1, 1, 1);
         Weapon StandIn2 = new Weapon("Placeholder2", 2, 2, 2);
         swampWeapon.add(StandIn1);
         swampWeapon.add(StandIn2);
-        
+
         //Village weapon
         Weapon StandIn3 = new Weapon("Placeholder3", 3, 3, 3);
         Weapon StandIn4 = new Weapon("Placeholder4", 4, 4, 4);
@@ -42,18 +42,27 @@ public class Player {
         villageWeapon.add(StandIn3);
         villageWeapon.add(StandIn4);
         villageWeapon.add(StandIn5);
-        
+
     }
 
     public void weaponSpawn(int area) {
         if (randy.nextDouble() <= 0.33) { //1 in 3 chances to encounter weapon
             switch (area) {
-                case 1 ->
-                    equipWeapon(woodsWeapon);
-                case 2 ->
-                    equipWeapon(swampWeapon);
-                case 3 ->
-                    equipWeapon(villageWeapon);
+                case 1 -> {
+                    if (!woodsWeapon.isEmpty()) {
+                        equipWeapon(woodsWeapon);
+                    }
+                }
+                case 2 -> {
+                    if (!swampWeapon.isEmpty()) {
+                        equipWeapon(swampWeapon);
+                    }
+                }
+                case 3 -> {
+                    if (!villageWeapon.isEmpty()) {
+                        equipWeapon(villageWeapon);
+                    }
+                }
             }
         }
     }
@@ -65,15 +74,27 @@ public class Player {
         System.out.println("The " + found.getName() + " deals " + found.getMin() + "-" + found.getMax() + " damage. " + found.getSpeedMsg());
         System.out.println("Equipped item: " + equipped.getName());
         System.out.println("The " + equipped.getName() + " deals " + equipped.getMin() + "-" + equipped.getMax() + " damage. " + equipped.getSpeedMsg());
-        System.out.print("\nSwitch your weapon? (yes/no): ");
-        String choice = scn.nextLine();
 
-        if (choice.equalsIgnoreCase("yes")) {
-            System.out.println("You equipped the " + found.getName() + " and left your " + equipped.getName() + ".");
-            equipped = found;
-        } else {
-            System.out.println("You left the " + found.getName() + ".");
+        boolean equipping = true;
+        while (equipping) {
+            System.out.print("\nSwitch your weapon? (yes/no): ");
+            String choice = scn.nextLine();
+
+            switch (choice.toLowerCase()) {
+                case "yes" -> {
+                    System.out.println("You equipped the " + found.getName() + " and left your " + equipped.getName() + ".");
+                    equipped = found;
+                    equipping = false;
+                }
+                case "no" -> {
+                    System.out.println("You left the " + found.getName() + ".");
+                    equipping = false;
+                }
+                default ->
+                    System.out.println("Invalid input. Please try again.");
+            }
         }
+        weapons.remove(found);
         System.out.println("");
     }
 }
