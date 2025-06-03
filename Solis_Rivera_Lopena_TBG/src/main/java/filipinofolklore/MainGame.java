@@ -4,10 +4,14 @@ import java.util.*;
 
 public class MainGame {
 
+    private static final Player player = new Player();
     private static final Travel travel = new Travel();
     private static final Scanner scn = new Scanner(System.in);
+    private static boolean inGame = true;
 
     public static void main(String[] args) {
+        player.initWeapons();
+        
         while (true) {
             System.out.println("\nPAUWI KA NA");
             System.out.println("\n-*-*-*-*-Main Menu-*-*-*-*-");
@@ -42,20 +46,19 @@ public class MainGame {
     }
 
     private static void gameStart() {
-        boolean inGame = true;
-
         while (inGame) {
             System.out.println("");
             System.out.println(travel.getAreaMessage() + travel.tileCheck() + "");
+            player.weaponSpawn(travel.getAreaCounter());
             System.out.println("What would you like to do right now?");
             System.out.println("");
             System.out.println("Players's HP: ");
-            System.out.println("// Proceed // Sako (Check Inventory) // Exit (Return to Main Menu) //");
+            System.out.println("// Walk // Sako (Check Inventory) // Exit (Main Menu) //");
             System.out.print("Your Action: ");
             String action = scn.next();
 
             switch (action.toLowerCase()) {
-                case "proceed" ->
+                case "walk" ->
                     travel.proceed();
                 case "sako" ->
                     System.out.println("INSERT SACK");
