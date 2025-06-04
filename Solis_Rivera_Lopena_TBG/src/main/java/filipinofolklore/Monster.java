@@ -20,17 +20,17 @@ public class Monster extends Character {
      * - damage implementation 
      * - overall implementation (call to main)
      * 
-     * Woods: 2 enemies
-     * Swamp: 3 enemies
-     * Village: 4 enemies
+     * Woods: 2 enemies 1 special ability per enemy
+     * Swamp: 3 enemies 1 special ability per enemy
+     * Village: 4 enemies 1 special ability per enemy
      * 
      * FOR BOSSES:
-     * Mountain Boss:
+     * Mountain Boss: 
      * Ocean Boss:
      */
 
     // WOODS
-    public static final Monster woodMons1 = new Monster("Baboy Rams", 50, 1, 10, 1, 1);
+    public static final Monster sigbin = new Monster("Sigbin", 50, 1, 10, 1, 1);
     public static final Monster woodMons2 = new Monster("Tikbalang", 60, 5, 12, 2, 2);
 
     // SWAMP
@@ -44,9 +44,10 @@ public class Monster extends Character {
     public static final Monster villMons3 = new Monster("Aswang", 55, 7, 13, 2, 2);
     public static final Monster villMons4 = new Monster("Aswang", 55, 7, 13, 2, 2);
 
+    // Like weaponSpawn in Player.java, each arraylist will have a spwan chances  
     public static final ArrayList<Monster> woodMonsters = new ArrayList<Monster>() {
         {
-            add(woodMons1);
+            add(sigbin);
             add(woodMons2);
         }
     };
