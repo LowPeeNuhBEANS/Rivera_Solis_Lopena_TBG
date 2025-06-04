@@ -34,24 +34,24 @@ public class Player {
     //Initialize all weapons
     public void initWeapons() {
         //Default weapon
-        equipped = new Weapon("Stick", 5, 20, 10);
+        equipped = new Weapon("Stick", 5, 20, 20);
 
         //Woods weapon
         Weapon Balisong = new Weapon("Balisong", 15, 30, 10);
-        Weapon BoloKnife = new Weapon("Bolo Knife", 20, 50, -5);
+        Weapon BoloKnife = new Weapon("Arnis", 10, 20, 15);
         woodsWeapon.add(BoloKnife);
         woodsWeapon.add(Balisong);
 
         //Swamp weapon
-        Weapon StandIn1 = new Weapon("Placeholder1", 1, 1, 1);
-        Weapon StandIn2 = new Weapon("Placeholder2", 2, 2, 2);
+        Weapon StandIn1 = new Weapon("Sibat Spear", 15, 30, 5);
+        Weapon StandIn2 = new Weapon("Sundang", 20, 50, -5);
         swampWeapon.add(StandIn1);
         swampWeapon.add(StandIn2);
 
         //Village weapon
-        Weapon StandIn3 = new Weapon("Placeholder3", 3, 3, 3);
-        Weapon StandIn4 = new Weapon("Placeholder4", 4, 4, 4);
-        Weapon StandIn5 = new Weapon("Placeholder5", 5, 5, 5);
+        Weapon StandIn3 = new Weapon("Sinawit Axe", 30, 70,-10);
+        Weapon StandIn4 = new Weapon("Kris Sword", 40, 50, 10);
+        Weapon StandIn5 = new Weapon("Kampilan", 60, 80, -20);
         villageWeapon.add(StandIn3);
         villageWeapon.add(StandIn4);
         villageWeapon.add(StandIn5);
