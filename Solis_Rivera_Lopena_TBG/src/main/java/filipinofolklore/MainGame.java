@@ -1,6 +1,5 @@
 package filipinofolklore;
 
-import filipinofolklore.*;
 import java.util.Scanner;
 
 public class MainGame {
@@ -9,7 +8,6 @@ public class MainGame {
     private static final Travel travel = new Travel();
     private static final Scanner scn = new Scanner(System.in);
     private static boolean inGame = true;
-    private startBattle();
     public static void main(String[] args) {
         player.initWeapons();
         
@@ -61,7 +59,6 @@ public class MainGame {
             switch (action.toLowerCase()) {
                 case "walk" ->
                     travel.proceed();
-                    
                 case "sako" ->
                     System.out.println("INSERT SACK");
                 case "exit" ->
