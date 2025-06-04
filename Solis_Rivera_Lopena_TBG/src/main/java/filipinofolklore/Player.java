@@ -1,13 +1,14 @@
 package filipinofolklore;
 
 import java.util.Random;
-import java.util.Vector;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class Player {
 
     int atkSpeed = 30;
     int atkDmg = 25;
+    int health = 100;
     private static final Random randy = new Random();
     private static final Scanner scn = new Scanner(System.in);
     private static Weapon equipped;
@@ -17,6 +18,15 @@ public class Player {
     private static Vector<Weapon> villageWeapon = new Vector<>();
 
     public Player() {
+    }
+
+    public boolean isAlive(){return health > 0;}
+    public int getAtkSpeed() {return atkSpeed;}
+    public int attack(){return atkDmg;}
+    public String getName(){return "Player";}
+
+    public void takeDamage(int damage){
+        health -= damage;
     }
 
     public void initWeapons() {
