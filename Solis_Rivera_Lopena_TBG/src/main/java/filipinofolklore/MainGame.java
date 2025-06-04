@@ -26,6 +26,7 @@ public class MainGame {
                 case 1 -> {
                     if (travel.getAreaCounter() != 0) {
                         System.out.println("\n-*-*-*-*-GAME CONTINUED-*-*-*-*-");
+                        inGame = true;
                         gameStart();
                     } else {
                         System.out.println("\n-*-*-*-*-GAME START-*-*-*-*-");
