@@ -1,8 +1,8 @@
 package filipinofolklore;
 
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Vector;
 
 public class Player {
 
@@ -13,9 +13,9 @@ public class Player {
     private static final Scanner scn = new Scanner(System.in); //Scanner
     private static Weapon equipped; //Currently equipped weapon
 
-    private static Vector<Weapon> woodsWeapon = new Vector<>(); //Vector for woods weapons
-    private static Vector<Weapon> swampWeapon = new Vector<>(); //Vector for swamp weapons
-    private static Vector<Weapon> villageWeapon = new Vector<>(); //Vector for village weapons
+    private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); //Vector for woods weapons
+    private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); //Vector for swamp weapons
+    private static LinkedList<Weapon> villageWeapon = new LinkedList<>(); //Vector for village weapons
 
     //Constructor for player
     public Player() {
@@ -60,7 +60,7 @@ public class Player {
 
     //Spawn chance of weapons
     public void weaponSpawn(int area) {
-        if (randy.nextDouble() <= 0.33) { //1 in 3 chances to encounter weapon
+        if (randy.nextDouble() <= 0.25) { //1 in 4 chances to encounter weapon
             switch (area) {
                 case 1 -> {
                     if (!woodsWeapon.isEmpty()) {
@@ -82,8 +82,8 @@ public class Player {
     }
 
     //Equip weapon logic
-    private static void equipWeapon(Vector weapons) {
-        Weapon found = (Weapon) weapons.elementAt(randy.nextInt(weapons.size()));
+    private static void equipWeapon(LinkedList<Weapon> weapons) {
+        Weapon found = (Weapon) weapons.get(randy.nextInt(weapons.size()));
 
         System.out.println("You found a " + found.getName() + "!");
         System.out.println("The " + found.getName() + " deals " + found.getMin() + "-" + found.getMax() + " damage. " + found.getSpeedMsg());
