@@ -7,9 +7,9 @@ public class Monster extends Character {
         this.name = super.name;
     }
 
-    // MONSTERS HERE
+    // MONSTERS (DRAFT)
     Monster baboyRams = new Monster("Baboy Rams", 50, 1, 10, 1, 1);
-
+    
     /*Sample Monster Spell/skill - for each spell create a new spell/skill method
     public void roar() {
         System.out.println(name + " lets out a terrifying roar!");

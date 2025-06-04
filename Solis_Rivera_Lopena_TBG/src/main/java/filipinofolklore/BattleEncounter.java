@@ -3,6 +3,7 @@ package filipinofolklore;
 import java.util.Scanner;
 
 import sircardozaTBG.Monster;
+import sircardozaTBG.MonsterSkill;
 
 public class BattleEncounter {
     private Player player;
@@ -20,8 +21,15 @@ public class BattleEncounter {
         while (player.isAlive() && monster.isAlive()){
             if (playerFirst) {
                 // player's turn 
-            } else {
-               // monster's turn
+            } else { // enemy's turn
+            // draft 
+               if (monster.getName().equals("Baboy Rams")) {
+                    MonsterSkill.baboyRamsPassive(monster, player);
+                } else {
+                    int damage = monster.attack();
+                    player.takeDamage(damage);
+                    System.out.println("Monster Name: " + monster.getName() + "\n Monster Damage: " + damage );
+                }
             }
         }
     }
