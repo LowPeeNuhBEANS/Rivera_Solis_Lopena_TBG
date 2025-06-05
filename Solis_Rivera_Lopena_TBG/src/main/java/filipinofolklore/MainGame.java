@@ -30,6 +30,7 @@ public class MainGame {
                         gameStart();
                     } else {
                         System.out.println("\n-*-*-*-*-GAME START-*-*-*-*-");
+                        inGame = true;
                         gameStart();
                     }
                 }
@@ -59,8 +60,10 @@ public class MainGame {
             String action = scn.next();
 
             switch (action.toLowerCase()) {
-                case "walk" ->
+                case "walk" -> {
                     travel.proceed();
+                    checkBoss();
+                }
                 case "sako" ->
                     System.out.println("INSERT SACK");
                 case "exit" ->
@@ -70,6 +73,40 @@ public class MainGame {
                 }
             }
         }
+    }
+
+    private static void checkBoss() {
+        if (travel.getAreaCounter() == 4 && travel.getTileCounter() == 1) {//Area 4 Tile 1 is the beginning of the Boss
+            System.out.println("The mountain looms above you, the sky turns dark and the wind beginds to howl.\nA giant creature with incomprehensible nature stands before you.\nYou ready you weapon for the final showdown.");
+            //INSERT BOSS BATTLE ENCOUNTER HERE
+
+            //CODE AFTER BATTLE ENDS
+            System.out.println("After defeating the beast you run up the mountain eager to return home. Right below, you see your cozy little house.\nThen you notice a darkness growing in the sea beside the mountain, a new creature emerges... ");
+            System.out.println("Will you proceed to battle with the Bakunawa just beyond the Cliffs? (yes/no)");
+            String choice = scn.next();
+
+            boolean choosing = true;
+            while (choosing) {
+                switch (choice.toLowerCase()) {
+                    case "yes" -> {
+                        choosing = false;
+                        System.out.println("\"You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\\n" + //
+                                                        "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n" + //
+                                                        "Exhausted but determined, you brandish your weapom.\"");
+                        //INSERT OPTIONAL BOSS BATTLE
+                    }
+                    case "no" -> {
+                        choosing = false;
+                        goHome();
+                    }
+                    default -> System.out.println("Not a valid input.");
+                }
+            }
+        }
+    }
+
+    private static void goHome() {
+        System.out.println("You went home.");
     }
 
 //END OF CLASS    
