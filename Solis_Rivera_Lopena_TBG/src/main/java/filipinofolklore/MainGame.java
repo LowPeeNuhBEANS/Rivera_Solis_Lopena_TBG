@@ -8,6 +8,7 @@ public class MainGame {
     private static final Travel travel = new Travel();
     private static final Scanner scn = new Scanner(System.in);
     private static boolean inGame = true;
+
     public static void main(String[] args) {
         player.initWeapons();
         
