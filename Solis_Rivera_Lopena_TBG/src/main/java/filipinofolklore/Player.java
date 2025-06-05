@@ -6,18 +6,17 @@ import java.util.Vector;
 
 public class Player {
 
-    int atkSpeed = 30; //Player's attack speed
-    int atkDmg = 25; //Attack Damage
-    int health = 100; //Player health
-    private static final Random randy = new Random(); //Random variable
-    private static final Scanner scn = new Scanner(System.in); //Scanner
-    private static Weapon equipped; //Currently equipped weapon
+    int atkSpeed = 30;
+    int atkDmg = 25;
+    int health = 100;
+    private static final Random randy = new Random();
+    private static final Scanner scn = new Scanner(System.in);
+    private static Weapon equipped;
 
-    private static Vector<Weapon> woodsWeapon = new Vector<>(); //Vector for woods weapons
-    private static Vector<Weapon> swampWeapon = new Vector<>(); //Vector for swamp weapons
-    private static Vector<Weapon> villageWeapon = new Vector<>(); //Vector for village weapons
+    private static Vector<Weapon> woodsWeapon = new Vector<>();
+    private static Vector<Weapon> swampWeapon = new Vector<>();
+    private static Vector<Weapon> villageWeapon = new Vector<>();
 
-    //Constructor for player
     public Player() {
     }
 
@@ -26,12 +25,10 @@ public class Player {
     public int attack(){return atkDmg;}
     public String getName(){return "Player";}
 
-    //Receive damage
     public void takeDamage(int damage){
         health -= damage;
     }
 
-    //Initialize all weapons
     public void initWeapons() {
         //Default weapon
         equipped = new Weapon("Stick", 5, 20, 10);
@@ -58,7 +55,6 @@ public class Player {
 
     }
 
-    //Spawn chance of weapons
     public void weaponSpawn(int area) {
         if (randy.nextDouble() <= 0.33) { //1 in 3 chances to encounter weapon
             switch (area) {
@@ -81,7 +77,6 @@ public class Player {
         }
     }
 
-    //Equip weapon logic
     private static void equipWeapon(Vector weapons) {
         Weapon found = (Weapon) weapons.elementAt(randy.nextInt(weapons.size()));
 
