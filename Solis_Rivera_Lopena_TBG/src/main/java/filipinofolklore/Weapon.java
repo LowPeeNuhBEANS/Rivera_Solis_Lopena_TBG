@@ -1,6 +1,5 @@
 package filipinofolklore;
 
-import java.lang.Math;
 /*This file contains the Weapon class. All stats and getters of a Weapon object can be found here*/
 public class Weapon {
 
@@ -37,7 +36,7 @@ public class Weapon {
     public String getSpeedMsg() {
         if (atkSpeed > 0) {
             return "It increases your speed by " + atkSpeed + " points.";
-        }
+                    }
         return "It decreases your speed by " + Math.abs(atkSpeed) + " points.";
     }
 }
