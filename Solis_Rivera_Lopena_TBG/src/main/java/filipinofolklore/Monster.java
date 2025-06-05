@@ -31,12 +31,12 @@ public class Monster extends Character {
 
     // WOODS
     public static final Monster sigbin = new Monster("Sigbin", 50, 1, 10, 1, 1);
-    public static final Monster kapre = new Monster("kapre", 60, 5, 12, 2, 2);
+    public static final Monster kapre = new Monster("Kapre", 60, 5, 12, 2, 2);
 
     // SWAMP
     public static final Monster berberoka = new Monster("Berberoka", 45, 8, 15, 1, 3);
     public static final Monster siyokoy = new Monster("Siyokoy", 80, 10, 18, 5, 1);
-    public static final Monster swampMons3 = new Monster("Tiyanak", 40, 6, 14, 1, 2);
+    public static final Monster mutatedCarabao = new Monster("Mutated Carabao", 40, 6, 14, 1, 2);
 
     // VILLAGE
     public static final Monster batibat = new Monster("Batibat", 55, 7, 13, 2, 2);
@@ -48,24 +48,24 @@ public class Monster extends Character {
     public static final ArrayList<Monster> woodMonsters = new ArrayList<Monster>() {
         {
             add(sigbin);
-            add(woodMons2);
+            add(kapre);
         }
     };
 
     public static final ArrayList<Monster> swampMonsters = new ArrayList<Monster>() {
         {
-            add(swampMons1);
-            add(swampMons2);
-            add(swampMons3);
+            add(berberoka);
+            add(siyokoy);
+            add(mutatedCarabao);
         }
     };
 
     public static final ArrayList<Monster> villageMonsters = new ArrayList<Monster>() {
         {
-            add(villMons1);
-            add(villMons2);
-            add(villMons3);
-            add(villMons4);
+            add(batibat);
+            add(sarangay);
+            add(tiyanak);
+            add(diwata);
         }
     };
 
