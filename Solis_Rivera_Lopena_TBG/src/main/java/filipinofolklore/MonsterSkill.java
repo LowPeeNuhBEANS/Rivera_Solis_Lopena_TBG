@@ -2,6 +2,7 @@ package filipinofolklore;
 
 public class MonsterSkill {
 
+    // NOT YET IMPLEMENTED
     // SKILL PASSIVE DRAFT: Attack is increased by 1.5
     // (the "sigbinSkill" name can be changed to atkIncreaseBy1.5 depending if this method will be used again)
     public static void sigbinSkill(Monster monster, Player player) {
@@ -48,4 +49,5 @@ public class MonsterSkill {
         int finalDamage = baseDamage;
         player.takeDamage(finalDamage);
     }
+    
 }
