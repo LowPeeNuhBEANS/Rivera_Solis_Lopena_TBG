@@ -12,15 +12,21 @@ public class MainGame {
     public static void main(String[] args) {
         player.initWeapons();
         
-        while (true) {
+                while (true) {
             System.out.println("\nPAUWI KA NA");
             System.out.println("\n-*-*-*-*-Main Menu-*-*-*-*-");
             System.out.println("1. Start Game");
             System.out.println("2. Exit Game");
-
             System.out.print("\nEnter your choice: ");
-            int choice = scn.nextInt();
-            scn.nextLine();
+            String input = scn.nextLine();
+            int choice;
+
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid choice, try again.");
+                continue;
+            }
 
             switch (choice) {
                 case 1 -> {
@@ -33,13 +39,12 @@ public class MainGame {
                         inGame = true;
                         gameStart();
                     }
+                    scn.nextLine();
                 }
-
                 case 2 -> {
                     System.out.println("Exiting game... Goodbye!");
                     return;
                 }
-
                 default -> {
                     System.out.println("Invalid choice, try again.");
                 }
