@@ -13,11 +13,12 @@ public class Player {
     private static final Scanner scn = new Scanner(System.in);
     private static Weapon equipped;
 
-    private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); // Vector for woods weapons
-    private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); // Vector for swamp weapons
-    private static LinkedList<Weapon> villageWeapon = new LinkedList<>(); // Vector for village weapons
+    private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); // for woods weapons
+    private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); // for swamp weapons
+    private static LinkedList<Weapon> villageWeapon = new LinkedList<>(); // for village weapons
 
     public Player() {
+        initWeapons();
     }
 
     public boolean isAlive() {
@@ -40,7 +41,7 @@ public class Player {
         health -= damage;
     }
 
-    public void initWeapons() {
+    private void initWeapons() {
         // Default weapon
         equipped = new Weapon("Stick", 5, 20, 20);
 
@@ -51,18 +52,18 @@ public class Player {
         woodsWeapon.add(Balisong);
 
         // Swamp weapon
-        Weapon StandIn1 = new Weapon("Sibat Spear", 15, 30, 5);
-        Weapon StandIn2 = new Weapon("Sundang", 20, 50, -5);
-        swampWeapon.add(StandIn1);
-        swampWeapon.add(StandIn2);
+        Weapon SibatSpear = new Weapon("Sibat Spear", 15, 30, 5);
+        Weapon Bolo = new Weapon("Bolo Knife", 20, 50, -5);
+        swampWeapon.add(SibatSpear);
+        swampWeapon.add(Bolo);
 
         // Village weapon
-        Weapon StandIn3 = new Weapon("Sinawit Axe", 30, 70, -10);
-        Weapon StandIn4 = new Weapon("Kris Sword", 40, 50, 10);
-        Weapon StandIn5 = new Weapon("Kampilan", 60, 80, -20);
-        villageWeapon.add(StandIn3);
-        villageWeapon.add(StandIn4);
-        villageWeapon.add(StandIn5);
+        Weapon SinawitAxe = new Weapon("Sinawit Axe", 30, 70, -10);
+        Weapon Kris = new Weapon("Kris", 40, 50, 10);
+        Weapon Kampilan = new Weapon("Kampilan", 60, 80, -20);
+        villageWeapon.add(SinawitAxe);
+        villageWeapon.add(Kris);
+        villageWeapon.add(Kampilan);
 
     }
 

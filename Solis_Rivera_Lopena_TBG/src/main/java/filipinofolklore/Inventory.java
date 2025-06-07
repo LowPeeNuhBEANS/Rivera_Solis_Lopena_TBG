@@ -1,146 +1,133 @@
-package folkloregame;
+package filipinofolklore;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Stack;
+import java.util.Scanner;
 
-public class Inventory {//Attempt 1
+public class Inventory {
+
     int playerHp = 100;
-    private static final HashMap<String, Stack> items = new HashMap<>();
 
-    public void initial() {
+    private static final Scanner scn = new Scanner(System.in);
+    private static final HashMap<String, Stack<Integer>> items = new HashMap<>();
 
-        //default
-        Stack<Integer> suman = new Stack<>();
-        suman.push(20);
-
-        items.put("Suman", suman);
-
-        Stack<Integer> maruya = new Stack<>();
-        maruya.push(10);
-
-        items.put("Maruya", maruya);
-
-        Stack<Integer> bingka = new Stack<>();
-        bingka.push(15);
-
-
-        items.put("Bingka", bingka);
-
-        Stack<Integer> panyawan = new Stack<>();
-        panyawan.push(45);
-
-        items.put("Panyawan", panyawan);
-
-        Stack<Integer> gabon = new Stack<>();
-        gabon.push(50);
-
-        items.put("Gabon", gabon);
+    public Inventory() {
+        initializeItems();
     }
 
-    public void printInventory() {
-        System.out.println("Equipped item: Balisong");
-        System.out.println("Items Inside Sako: ");
-        for (String item : items.keySet()) {
-            int i = 1;
-            System.out.println(i + ". " + item);
-            i++;
-        }
-
+    //insert all items to the HashMap when inventory is initialized
+    private void initializeItems() {
+        items.put("Suman", createStack(20));
+        items.put("Maruya", createStack(10));
+        items.put("Bingka", createStack(15));
+        items.put("Panyawan", createStack(45));
+        items.put("Gabon", createStack(50));
     }
 
-    public void use(int choice) {
-        switch (choice) {
-            case 1 -> {
-                if (!items.get("Suman").isEmpty()) {
-                    consume(items.get("Suman"));
-                    System.out.println("Suman consumed!");
-                    this.playerHp += 20;
-                } else {
-                    System.out.println("No more Suman left!");
-                }
-            }
-            case 2 -> {
-                if (!items.get("Maruya").isEmpty()) {
-                    consume(items.get("Maruya"));
-                    System.out.println("Maruya consumed!");
-                    this.playerHp += 10;
-                } else {
-                    System.out.println("No more Maruya left!");
-                }
-            }
-            case 3 -> {
-                if (!items.get("Bingka").isEmpty()) {
-                    consume(items.get("Bingka"));
-                    System.out.println("Bingka consumed!");
-                    this.playerHp += 15;
-                } else {
-                    System.out.println("No more Bingka left!");
-                }
-            }
-            case 4 -> {
-                if (!items.get("Panyawan").isEmpty()) {
-                    consume(items.get("Panyawan"));
-                    System.out.println("Panyawan consumed!");
-                    this.playerHp += 45;
-                } else {
-                    System.out.println("No more Panyawan left!");
-                }
-            }
-            case 5 -> {
-                if (!items.get("Gabon").isEmpty()) {
-                    consume(items.get("Gabon"));
-                    System.out.println("Gabon consumed!");
-                    this.playerHp += 50;
-                } 
-                else {
-                    System.out.println("No more Gabon left!");
-                }
-            }
-
-        }
-
-    }
-//FOR TESTING! CHECKER
-private void addItem(String itemName, int value) {
-    Stack<Integer> stack = items.getOrDefault(itemName, new Stack<>());
-    if (stack.size() >= 5) {
-        System.out.println("Cannot add more " + itemName + ". Maximum of 5 reached!");
-    } else {
-        stack.push(value);
-        items.put(itemName, stack);
-    }
-}
-
- public static void consume(Stack<Integer> itemsStack){
-        if (!itemsStack.isEmpty()) {
-            int playerHp = 100;
-            int value = itemsStack.pop();
-            playerHp += value;
-            System.out.println("Player HP increased by " + value + ". Current HP: " + playerHp);
-        } else {
-            System.out.println("No items left to consume!");
-        }
+    //Creates stacks automatically when first initializing
+    private static Stack<Integer> createStack(int hp) {
+        Stack<Integer> food = new Stack<>();
+        food.push(hp);
+        return food;
     }
 
-    public void checkMethod(Stack items){
-
-        //Checks if the stack item exceeds 4
-        if(items.size() > 4){
-            System.out.println("Your inventory is full!");
-        }
-    }
-
+    //Code for showing and interacting with inventory
     public void showInventory() {
-        System.out.println("Items Inside Sako: ");
+        boolean inSako = true;
+        while (inSako) {
 
-        int i = 1;
-        for (String item : items.keySet()) {
-            System.out.println(i + ". " + item + " " + "["+ itemsLeft(items.get(item))+"]");
-            i++;
+            System.out.println("\nItems Inside Sako: ");
+            int i = 1;
+            for (String item : items.keySet()) {
+                System.out.println(i + ". " + item + " " + "(" + items.get(item).size() + ")");
+                i++;
+            }
+
+            System.out.println("\nWhat will you do with your inventory?");
+            System.out.println("// Check // Eat // Back");
+            String choice = scn.next();
+
+            switch (choice.toLowerCase()) {
+                case "check" -> {
+                    System.out.println("\nWhich item? (Choose a number)");
+                    int item = scn.nextInt();
+                    scn.nextLine();
+                    check(readChoice(item));
+                }
+                case "eat" -> {
+                    System.out.println("\nWhich item? (Choose a number)");
+                    int item = scn.nextInt();
+                    scn.nextLine();
+                    use(readChoice(item));
+                }
+                case "back" ->
+                    inSako = false;
+                default -> {
+                    System.out.println("Invalid input, try again.");
+                }
+            }
         }
     }
 
-    private static int itemsLeft(Stack items){
-        return items.size();
+    //Function to assign user's choice to HashMap key
+    private String readChoice(int choice) {
+        String itemName = switch (choice) {
+            case 1 ->
+                "Suman";
+            case 2 ->
+                "Maruya";
+            case 3 ->
+                "Bingka";
+            case 4 ->
+                "Panyawan";
+            case 5 ->
+                "Gabon";
+            default ->
+                null;
+        };
+        return itemName;
+    }
+
+    //Check how much health the item will restore
+    private void check(String itemName) {
+        if (itemName == null) {
+            System.out.println("Invalid item choice.");
+            return;
+        }
+
+        Stack<Integer> food = items.get(itemName);
+        if (food != null && !food.isEmpty()) {
+            System.out.println(itemName + " will restore " + food.peek() + " health.");
+        } else {
+            System.out.println("No more " + itemName + " left!");
+        }
+    }
+
+    //Use item to regain health
+    //NOTE: TO BE PAIRED WITH ACTUAL PLAYER'S HEALTH
+    private void use(String itemName) {
+        if (itemName == null) {
+            System.out.println("Invalid item choice.");
+            return;
+        }
+
+        Stack<Integer> food = items.get(itemName);
+        if (food != null && !food.isEmpty()) {
+            System.out.println(itemName + " consumed! You restored " + food.peek() + " health.");
+            playerHp += food.pop();
+        } else {
+            System.out.println("No more " + itemName + " left!");
+        }
+    }
+
+//FOR TESTING! CHECKER
+    private void addItem(String itemName, int value) {
+        Stack<Integer> stack = items.getOrDefault(itemName, new Stack<>());
+        if (stack.size() >= 5) {
+            System.out.println("Cannot add more " + itemName + ". Maximum of 5 reached!");
+        } else {
+            stack.push(value);
+            items.put(itemName, stack);
+        }
     }
 }
-    
