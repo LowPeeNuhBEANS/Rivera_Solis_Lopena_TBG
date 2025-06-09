@@ -112,10 +112,10 @@ public class MainGame {
 
     //Function to start battle with monster as parameter
     private static void startBattle(Monster monster) {
-        System.out.println("\n" + monster.getName() + " appeared!");
-        BattleEncounter battle = new BattleEncounter(player, monster);
-        battle.startBattle();
-    }
+    System.out.println("\n" + monster.getName() + " appeared!");
+    BattleEncounter battle = new BattleEncounter(player, monster, travel); 
+    battle.startBattle();
+}
 
     private static void checkBoss() {
         if (travel.getAreaCounter() == 4 && travel.getTileCounter() == 1) {// Area 4 Tile 1 is the beginning of the Boss

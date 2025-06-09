@@ -30,19 +30,20 @@ public class Monster extends Character {
      */
 
     // WOODS
-    public static final Monster sigbin = new Monster("Sigbin", 10, 1, 10, 1, 1);
-    public static final Monster kapre = new Monster("Kapre", 20, 5, 12, 2, 2);
+    public static final Monster sigbin = new Monster("Sigbin", 100, 10, 20, 1, 5);
+    public static final Monster kapre = new Monster("Kapre", 100, 20, 20, 2, 5);
 
     // SWAMP
-    public static final Monster berberoka = new Monster("Berberoka", 40, 8, 15, 1, 3);
-    public static final Monster siyokoy = new Monster("Siyokoy", 60, 10, 18, 5, 1);
-    public static final Monster mutatedCarabao = new Monster("Mutated Carabao", 80, 6, 14, 1, 2);
+    public static final Monster berberoka = new Monster("Berberoka", 150, 20, 30, 1, 10);
+    public static final Monster siyokoy = new Monster("Siyokoy", 150, 20, 30, 5, 10);
+    public static final Monster mutatedCarabao = new Monster("Mutated Carabao", 150, 20, 30, 1, 15);
 
     // VILLAGE
-    public static final Monster batibat = new Monster("Batibat", 100, 7, 13, 2, 2);
-    public static final Monster sarangay = new Monster("Sarangay", 100, 7, 13, 2, 2);
-    public static final Monster tiyanak = new Monster("Tiyanak", 100, 7, 13, 2, 2);
-    public static final Monster diwata = new Monster("Diwata", 120, 7, 13, 2, 2);
+    public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40, 2, 15);
+    public static final Monster sarangay = new Monster("Sarangay", 200, 30, 40, 2, 15);
+    public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 2, 20);
+    public static final Monster diwata = new Monster("Diwata", 200, 30, 40, 2, 20);
+
 
     // Like weaponSpawn in Player.java, each arraylist will have a spwan chances  
     public static final ArrayList<Monster> woodMonsters = new ArrayList<Monster>() {
@@ -62,7 +63,7 @@ public class Monster extends Character {
 
     public static final ArrayList<Monster> villageMonsters = new ArrayList<Monster>() {
         {
-            add(batibat);
+            add(manananggal);
             add(sarangay);
             add(tiyanak);
             add(diwata);
