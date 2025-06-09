@@ -1,74 +1,52 @@
 package filipinofolklore;
 
-import java.util.LinkedList;
 import java.util.Random;
+import java.util.Vector;
 import java.util.Scanner;
 
 public class Player {
 
     int atkSpeed = 30;
     int atkDmg = 25;
-    int health = 100;
     private static final Random randy = new Random();
     private static final Scanner scn = new Scanner(System.in);
     private static Weapon equipped;
 
-    private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); // for woods weapons
-    private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); // for swamp weapons
-    private static LinkedList<Weapon> villageWeapon = new LinkedList<>(); // for village weapons
+    private static Vector<Weapon> woodsWeapon = new Vector<>();
+    private static Vector<Weapon> swampWeapon = new Vector<>();
+    private static Vector<Weapon> villageWeapon = new Vector<>();
 
     public Player() {
-        initWeapons();
     }
 
-    public boolean isAlive() {
-        return health > 0;
-    }
+    public void initWeapons() {
+        //Default weapon
+        equipped = new Weapon("Stick", 5, 20, 10);
 
-    public int getAtkSpeed() {
-        return atkSpeed;
-    }
-
-    public int attack() {
-        return atkDmg;
-    }
-
-    public String getName() {
-        return "Player";
-    }
-
-    public void takeDamage(int damage) {
-        health -= damage;
-    }
-
-    private void initWeapons() {
-        // Default weapon
-        equipped = new Weapon("Stick", 5, 20, 20);
-
-        // Woods weapon
+        //Woods weapon
         Weapon Balisong = new Weapon("Balisong", 15, 30, 10);
-        Weapon BoloKnife = new Weapon("Arnis", 10, 20, 15);
+        Weapon BoloKnife = new Weapon("Bolo Knife", 20, 50, -5);
         woodsWeapon.add(BoloKnife);
         woodsWeapon.add(Balisong);
 
-        // Swamp weapon
-        Weapon SibatSpear = new Weapon("Sibat Spear", 15, 30, 5);
-        Weapon Bolo = new Weapon("Bolo Knife", 20, 50, -5);
-        swampWeapon.add(SibatSpear);
-        swampWeapon.add(Bolo);
+        //Swamp weapon
+        Weapon StandIn1 = new Weapon("Placeholder1", 1, 1, 1);
+        Weapon StandIn2 = new Weapon("Placeholder2", 2, 2, 2);
+        swampWeapon.add(StandIn1);
+        swampWeapon.add(StandIn2);
 
-        // Village weapon
-        Weapon SinawitAxe = new Weapon("Sinawit Axe", 30, 70, -10);
-        Weapon Kris = new Weapon("Kris", 40, 50, 10);
-        Weapon Kampilan = new Weapon("Kampilan", 60, 80, -20);
-        villageWeapon.add(SinawitAxe);
-        villageWeapon.add(Kris);
-        villageWeapon.add(Kampilan);
+        //Village weapon
+        Weapon StandIn3 = new Weapon("Placeholder3", 3, 3, 3);
+        Weapon StandIn4 = new Weapon("Placeholder4", 4, 4, 4);
+        Weapon StandIn5 = new Weapon("Placeholder5", 5, 5, 5);
+        villageWeapon.add(StandIn3);
+        villageWeapon.add(StandIn4);
+        villageWeapon.add(StandIn5);
 
     }
 
     public void weaponSpawn(int area) {
-        if (randy.nextDouble() <= 0.25) { // 1 in 4 chances to encounter weapon
+        if (randy.nextDouble() <= 0.33) { //1 in 3 chances to encounter weapon
             switch (area) {
                 case 1 -> {
                     if (!woodsWeapon.isEmpty()) {
@@ -89,16 +67,13 @@ public class Player {
         }
     }
 
-    // Equip weapon logic
-    private static void equipWeapon(LinkedList<Weapon> weapons) {
-        Weapon found = (Weapon) weapons.get(randy.nextInt(weapons.size()));
+    private static void equipWeapon(Vector weapons) {
+        Weapon found = (Weapon) weapons.elementAt(randy.nextInt(weapons.size()));
 
         System.out.println("You found a " + found.getName() + "!");
-        System.out.println("The " + found.getName() + " deals " + found.getMin() + "-" + found.getMax() + " damage. "
-                + found.getSpeedMsg());
+        System.out.println("The " + found.getName() + " deals " + found.getMin() + "-" + found.getMax() + " damage. " + found.getSpeedMsg());
         System.out.println("Equipped item: " + equipped.getName());
-        System.out.println("The " + equipped.getName() + " deals " + equipped.getMin() + "-" + equipped.getMax()
-                + " damage. " + equipped.getSpeedMsg());
+        System.out.println("The " + equipped.getName() + " deals " + equipped.getMin() + "-" + equipped.getMax() + " damage. " + equipped.getSpeedMsg());
 
         boolean equipping = true;
         while (equipping) {
@@ -107,8 +82,7 @@ public class Player {
 
             switch (choice.toLowerCase()) {
                 case "yes" -> {
-                    System.out.println(
-                            "You equipped the " + found.getName() + " and left your " + equipped.getName() + ".");
+                    System.out.println("You equipped the " + found.getName() + " and left your " + equipped.getName() + ".");
                     equipped = found;
                     equipping = false;
                 }
@@ -122,9 +96,5 @@ public class Player {
         }
         weapons.remove(found);
         System.out.println("");
-    }
-
-    public static Weapon getEquippedWeapon() {
-        return equipped;
     }
 }
