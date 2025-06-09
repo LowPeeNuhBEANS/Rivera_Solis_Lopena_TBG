@@ -37,6 +37,10 @@ public class Player {
         return "Player";
     }
 
+    public int getHp() {
+        return health;
+    }
+
     public void takeDamage(int damage) {
         health -= damage;
     }
