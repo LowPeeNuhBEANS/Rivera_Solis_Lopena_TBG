@@ -8,30 +8,30 @@ public class Inventory {
 
     int playerHp = 100;
 
-    private static final Scanner scn = new Scanner(System.in);
-    private static final HashMap<String, Stack<Integer>> items = new HashMap<>();
+    private static final Scanner scn = new Scanner(System.in); //Scanner for input
+    private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); //Hashmap for Item Name and Health Points
 
     public Inventory() {
         initializeItems();
     }
 
-    //insert all items to the HashMap when inventory is initialized
+    //Inserts all items to the HashMap when inventory is initialized
     private void initializeItems() {
-        items.put("Suman", createStack(20));
-        items.put("Maruya", createStack(10));
-        items.put("Bingka", createStack(15));
-        items.put("Panyawan", createStack(45));
-        items.put("Gabon", createStack(50));
+        items.put("suman", createStack(20));
+        items.put("maruya", createStack(10));
+        items.put("bingka", createStack(15));
+        items.put("panyawan", createStack(45));
+        items.put("abon", createStack(50));
     }
 
-    //Creates stacks automatically when first initializing
+    //Creates stacks automatically, pushes the passed integer
     private static Stack<Integer> createStack(int hp) {
         Stack<Integer> food = new Stack<>();
         food.push(hp);
         return food;
     }
 
-    //Code for showing and interacting with inventory
+    //Shows prompts to interact with inventory
     public void showInventory() {
         boolean inSako = true;
         while (inSako) {
@@ -49,14 +49,13 @@ public class Inventory {
 
             switch (choice.toLowerCase()) {
                 case "check" -> {
-                    System.out.println("\nWhich item? (Choose a number)");
-                    int item = scn.nextInt();
-                    scn.nextLine();
+                    System.out.println("\nWhich item?");
+                    String item = scn.next();
                     check(readChoice(item));
                 }
                 case "eat" -> {
-                    System.out.println("\nWhich item? (Choose a number)");
-                    int item = scn.nextInt();
+                    System.out.println("\nWhich item?");
+                    String item = scn.next();
                     scn.nextLine();
                     use(readChoice(item));
                 }
@@ -69,22 +68,17 @@ public class Inventory {
         }
     }
 
-    //Function to assign user's choice to HashMap key
-    private String readChoice(int choice) {
-        String itemName = switch (choice) {
-            case 1 ->
-                "Suman";
-            case 2 ->
-                "Maruya";
-            case 3 ->
-                "Bingka";
-            case 4 ->
-                "Panyawan";
-            case 5 ->
-                "Gabon";
-            default ->
-                null;
-        };
+    //Checks if user's choice matches with a key
+    private String readChoice(String choice) {
+        String itemName = null;
+
+        if (choice.equalsIgnoreCase("suman") ||
+            choice.equalsIgnoreCase("maruya") ||
+            choice.equalsIgnoreCase("bingka") ||
+            choice.equalsIgnoreCase("panyawan") ||
+            choice.equalsIgnoreCase("gabon") ||) {
+                itemName = choice.toLowerCase();
+            }
         return itemName;
     }
 

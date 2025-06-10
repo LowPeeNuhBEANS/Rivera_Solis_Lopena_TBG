@@ -9,10 +9,12 @@ public class Player {
     int atkSpeed = 30;
     int atkDmg = 25;
     int health = 100;
+
+    private static final Inventory = new Inventory();
     private static final Random randy = new Random();
     private static final Scanner scn = new Scanner(System.in);
     private static Weapon equipped;
-    private HealthBar healthBar = new HealthBar(health);
+    private static HealthBar healthBar = new HealthBar(health);
 
     private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); // for woods weapons
     private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); // for swamp weapons
