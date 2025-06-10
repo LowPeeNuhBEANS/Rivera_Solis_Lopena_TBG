@@ -33,7 +33,7 @@ public class MonsterSkill {
         // the counter.
         int damage;
         berberokaAttackCounter++;
-    
+
         if (berberokaAttackCounter == 4) {
             damage = (int) (monster.attack() * 1.5);
             System.out.println(monster.getName() + " unleashes a CHARGED attack!");
@@ -53,7 +53,7 @@ public class MonsterSkill {
         if (siyokoyAttackCounter < 3) {
             siyokoyAttackCounter++;
         }
-        
+
         if (siyokoyAttackCounter == 3) {
             damage = (int) (monster.attack() * 2);
             System.out.println(monster.getName() + " unleashes a CHARGED attack!");
@@ -129,30 +129,43 @@ public class MonsterSkill {
 
     // Mountain Boss
     public static void minokawaSkill(Monster monster, Player player) {
-        // Once Minokawa reaches his 4th succeeding attack, Minokawa will deal 2x the
+        // Once Minokawa reaches his 5th succeeding attack, Minokawa will deal 2x the
         // damage from then on.
         int damage;
+        double multiplier = 1.0;
 
-        // Attack multiplier: 1, 1.25, 1.5, 1.75
-        // Max attack mulitplier: 2x
-
-        if (minokawaAttackCounter < 4) {
-            minokawaAttackCounter++;
+        switch (minokawaAttackCounter) {
+            case 0:
+                multiplier = 1.0;
+                break;
+            case 1:
+                multiplier = 1.25;
+                break;
+            case 2:
+                multiplier = 1.5;
+                break;
+            case 3:
+                multiplier = 1.75;
+                break;
+            default:
+                multiplier = 2.0;
+                break;
         }
 
-        if (minokawaAttackCounter == 4) {
-            damage = (int) (monster.attack() * 2);
+        if (multiplier == 2.0) {
             System.out.println(monster.getName() + " unleashes a CHARGED attack!");
             System.out.println("From now on, " + monster.getName() + " will deal 2x damage!");
-        } else {
-            damage = monster.attack();
         }
+
+        damage = (int) (monster.attack() * multiplier);
         player.takeDamage(damage);
         System.out.println(monster.getName() + " charges. It attacks you for " + damage + " damage!");
+        minokawaAttackCounter++;
     }
 
     // Ocean Boss
     public static void bakunawaSkill(Monster monster, Player player) {
+        
         int damage = monster.attack();
         player.takeDamage(damage);
         System.out.println(monster.getName() + " attacks you for " + damage + " damage!");
