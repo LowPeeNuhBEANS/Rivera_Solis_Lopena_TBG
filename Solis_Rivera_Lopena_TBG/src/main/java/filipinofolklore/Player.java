@@ -12,6 +12,7 @@ public class Player {
     private static final Random randy = new Random();
     private static final Scanner scn = new Scanner(System.in);
     private static Weapon equipped;
+    private HealthBar healthBar = new HealthBar(health);
 
     private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); // for woods weapons
     private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); // for swamp weapons
@@ -19,6 +20,7 @@ public class Player {
 
     public Player() {
         initWeapons();
+
     }
 
     public boolean isAlive() {
@@ -33,17 +35,12 @@ public class Player {
         return atkDmg;
     }
 
-    public String getName() {
-        return "Player";
-    }
-
-    public int getHp() {
-        return health;
-    }
 
     public void takeDamage(int damage) {
         health -= damage;
     }
+
+    
 
     private void initWeapons() {
         // Default weapon
@@ -69,6 +66,22 @@ public class Player {
         villageWeapon.add(Kris);
         villageWeapon.add(Kampilan);
 
+    }
+
+    
+    // Health bar representation [TESTING]
+    public static String getHealthBar(int hp) {
+        int totalBars = 20;
+        int bars = Math.max(0, (int) Math.round(hp / 5.0));
+        StringBuilder bar = new StringBuilder("[");
+        for (int i = 0; i < bars; i++) {
+            bar.append("|");
+        }
+        for (int i = bars; i < totalBars; i++) {
+            bar.append(" ");
+        }
+        bar.append("]");
+        return bar.toString();
     }
 
     public void weaponSpawn(int area) {
@@ -131,4 +144,18 @@ public class Player {
     public static Weapon getEquippedWeapon() {
         return equipped;
     }
+
+    //Add item to inventory test environment
+        public static void addItemToInventory(){ 
+        
+    }
+    //Player Health Bar
+        public void getPlayerHealthBar(){
+        healthBar.displayHealth();
+    }
 }
+    
+
+    
+
+//END OF CLASS    
