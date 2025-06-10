@@ -3,7 +3,6 @@ package filipinofolklore;
 import java.util.Random;
 import java.util.Scanner;
 
-
 public class MainGame {
 
     private static final Random rand = new Random();
@@ -13,6 +12,7 @@ public class MainGame {
     private static boolean inGame = true;
     private static int playerHp = 100; //[TESTING FOR HEALTHBAR]
     private static String pName;
+    private static boolean moved = false;
 
     //COLORS [TESTING]
     public static final String RESET = "\u001B[0m";
@@ -39,10 +39,10 @@ public class MainGame {
             System.out.println(GREEN + "1. Start Game");
             System.out.println(RED + "2. Exit Game");
 
-            while (true) { 
+            while (true) {
                 System.out.print(RESET + "\nEnter your choice: ");
                 String input = scn.nextLine();
-                
+
                 try {
                     choice = Integer.parseInt(input);
                     break;
@@ -81,21 +81,27 @@ public class MainGame {
         while (inGame) {
             System.out.println("");
             System.out.println(travel.getAreaMessage() + travel.tileCheck() + "");
-            player.weaponSpawn(travel.getAreaCounter());
-            monsterSpawned(); //Spawn Monster when moving tiles
+
+            if (moved) {
+                player.spawnWeapons(travel.getAreaCounter()); //Spawn weapon when moving tiles
+                monsterSpawned(); //Spawn Monster when moving tiles
+                moved = false;
+            }
+
             System.out.println("");
             System.out.println("What would you like to do right now?");
             System.out.println("");
-            System.out.println(CYAN + pName + " HP: " + GREEN);
+            System.out.print(CYAN + pName + " HP: " + GREEN);
             player.getPlayerHealthBar();
-            System.out.println("//" + GREEN + " Walk " + RESET + "//" + YELLOW + "Sako (Check Inventory)" + RESET + "//" + RED + " Exit (Main Menu)" + RESET + " //");
-            System.out.print("Your Action: ");
+            System.out.println(RESET + "||" + GREEN + " Walk " + RESET + "||" + YELLOW + " Sako (Check Inventory) " + RESET + "||" + RED + " Exit (Main Menu)" + RESET + " ||");
+            System.out.print("> ");
             String action = scn.next();
 
             switch (action.toLowerCase()) {
                 case "walk" -> {
                     travel.proceed();
                     checkBoss();
+                    moved = true;
                 }
                 case "sako" ->
                     player.openInventory();

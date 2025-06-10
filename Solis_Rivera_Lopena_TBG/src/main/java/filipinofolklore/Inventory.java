@@ -6,7 +6,8 @@ import java.util.Stack;
 
 public class Inventory {
 
-    private static int health;
+    private static int maxHealth;
+    private static int currentHealth;
     private static final Scanner scn = new Scanner(System.in); //Scanner for input
     private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); //Hashmap for Item Name and Health Points
 
@@ -20,7 +21,7 @@ public class Inventory {
         items.put("maruya", createStack(10));
         items.put("bingka", createStack(15));
         items.put("panyawan", createStack(45));
-        items.put("abon", createStack(50));
+        items.put("gabon", createStack(50));
     }
 
     //Creates stacks automatically, pushes the passed integer
@@ -32,31 +33,36 @@ public class Inventory {
 
     //Shows prompts to interact with inventory
     public void showInventory(int playerHealth) {
-        health = playerHealth;
+        currentHealth = playerHealth;
         boolean inSako = true;
         while (inSako) {
 
             System.out.println("\nItems Inside Sako: ");
             int i = 1;
             for (String item : items.keySet()) {
-                System.out.println(i + ". " + item + " " + "(" + items.get(item).size() + ")");
+                System.out.println(i + ". " + capitalize(item) + " " + "(" + items.get(item).size() + ")");
                 i++;
             }
 
             System.out.println("\nWhat will you do with your inventory?");
-            System.out.println("// Check // Eat // Back");
+            System.out.println("|| Check || Eat || Back ||");
+            System.out.print(">");
             String choice = scn.next();
 
             switch (choice.toLowerCase()) {
                 case "check" -> {
                     System.out.println("\nWhich item?");
+                    System.out.print(">");
                     String item = scn.next();
+                    System.out.println();
                     check(readChoice(item));
                 }
                 case "eat" -> {
                     System.out.println("\nWhich item?");
+                    System.out.print(">");
                     String item = scn.next();
                     scn.nextLine();
+                    System.out.println();
                     use(readChoice(item));
                 }
                 case "back" ->
@@ -91,9 +97,9 @@ public class Inventory {
 
         Stack<Integer> food = items.get(itemName);
         if (food != null && !food.isEmpty()) {
-            System.out.println(itemName + " will restore " + food.peek() + " health.");
+            System.out.println(capitalize(itemName) + " will restore " + food.peek() + " health.");
         } else {
-            System.out.println("No more " + itemName + " left!");
+            System.out.println("No more " + capitalize(itemName) + " left!");
         }
     }
 
@@ -106,10 +112,14 @@ public class Inventory {
 
         Stack<Integer> food = items.get(itemName);
         if (food != null && !food.isEmpty()) {
-            System.out.println(itemName + " consumed! You restored " + food.peek() + " health.");
-            health += food.pop();
+            System.out.println(capitalize(itemName) + " consumed! You restored " + food.peek() + " health.");
+            currentHealth += food.pop();
         } else {
-            System.out.println("No more " + itemName + " left!");
+            System.out.println("No more " + capitalize(itemName) + " left!");
         }
+    }
+
+    private String capitalize(String name) {
+        return name.substring(0,1).toUpperCase() + name.substring(1);
     }
 }
