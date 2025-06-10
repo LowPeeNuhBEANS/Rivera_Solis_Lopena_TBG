@@ -45,17 +45,16 @@ public class BattleEncounter {
 
                 System.out.println("\n// Attack // Sako (Check Inventory) // Parry //");
                 System.out.print("Your Action: ");
-                
+
                 // TO DO: Implement a catch for user input errors
                 String input = sc.nextLine();
-
+                
                 if (input.equalsIgnoreCase("attack")) {
-                    // get the weapon
+                    // get weapon
                     Weapon weapon = Player.getEquippedWeapon();
                     int weaponDamage = 0;
                     if (weapon != null) {
-                        // this will randomize the weapon damage since weapon is initialized with int
-                        // min and int max
+                        // randomize weapon damage
                         weaponDamage = weapon.getMin()
                                 + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
                     }
@@ -70,6 +69,9 @@ public class BattleEncounter {
 
                     System.out.println(monster.getName() + "'s HP: ");
                     System.out.println(getHealthBar(monster.getHp()));
+
+                } else if (input.equalsIgnoreCase("sako")) {
+                    inventory.showInventory();
                 }
                 if (!monster.isAlive()) {
                     break;
@@ -94,16 +96,15 @@ public class BattleEncounter {
                 System.out.println("// Attack // Sako (Check Inventory) // Parry //");
                 System.out.print("Your Action: ");
 
-                // TO DO: Implement a catch for user input errors 
+                // TO DO: Implement a catch for user input errors
                 String input = sc.nextLine();
 
                 if (input.equalsIgnoreCase("attack")) {
-                    // get ww
+                    // get weapon
                     Weapon weapon = Player.getEquippedWeapon();
                     int weaponDamage = 0;
                     if (weapon != null) {
-                        // this will randomize the weapon damage since weapon is initialized with int
-                        // min and int max
+                        // randomize weapon damage
                         weaponDamage = weapon.getMin()
                                 + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
                     }
@@ -118,6 +119,9 @@ public class BattleEncounter {
 
                     System.out.println(monster.getName() + "'s HP: ");
                     System.out.println(getHealthBar(monster.getHp()));
+
+                } else if (input.equalsIgnoreCase("sako")) {
+                    inventory.showInventory();
                 }
             }
         }
