@@ -3,6 +3,7 @@ package filipinofolklore;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class MainGame {
 
     private static final Random rand = new Random();
@@ -86,8 +87,9 @@ public class MainGame {
             System.out.println("");
             System.out.println("What would you like to do right now?");
             System.out.println("");
-            System.out.println(CYAN + pName +" HP: " + GREEN + getPlayerHealthBar(playerHp) + RESET);
-            System.out.println("//" + GREEN +" Walk "+ RESET + "//" + YELLOW+ "Sako (Check Inventory)" +RESET+"//"+RED+" Exit (Main Menu)"+RESET+" //");
+            System.out.print(GREEN + pName +" HP: ");
+            player.getPlayerHealthBar();
+            System.out.println(RESET + "//" + GREEN +" Walk "+ RESET + "//" + YELLOW+ " Sako (Check Inventory) " +RESET+"//"+RED+" Exit (Main Menu)"+RESET+" //");
             System.out.print("Your Action: ");
             String action = scn.next();
 
@@ -146,7 +148,8 @@ public class MainGame {
     //Function to start battle with monster as parameter
     private static void startBattle(Monster monster) {
     System.out.println("\n" + monster.getName() + " appeared!");
-    BattleEncounter battle = new BattleEncounter(player, monster, travel, inventory); 
+    HealthBar healthBar = new HealthBar(playerHp);
+    BattleEncounter battle = new BattleEncounter(player, monster, travel, inventory, healthBar);
     battle.startBattle();
 }
 
