@@ -11,22 +11,44 @@ public class MainGame {
     private static final Travel travel = new Travel();
     private static final Scanner scn = new Scanner(System.in);
     private static boolean inGame = true;
+    private static int playerHp = 100; //[TESTING FOR HEALTHBAR]
+    private static String pName;
+
+
+    //COLORS [TESTING]
+    public static final String RESET = "\u001B[0m";
+    public static final String BLACK = "\u001B[30m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PINK = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
 
     public static void main(String[] args) {
 
         while (true) {
-            System.out.println("\nPAUWI KA NA");
-            System.out.println("\n-*-*-*-*-Main Menu-*-*-*-*-");
-            System.out.println("1. Start Game");
-            System.out.println("2. Exit Game");
-            System.out.print("\nEnter your choice: ");
+            System.out.println(RED +"================================");
+            System.out.println("||                            ||");
+            System.out.println("||                            ||");
+            System.out.println("||       Seek ye Horror       ||");
+            System.out.println("||                            ||");
+            System.out.println("||                            ||");
+            System.out.println("================================");
+            System.out.println(GREEN + "1. Start Game");
+            System.out.println(RED + "2. Exit Game");
+            System.out.print(RESET + "\nEnter your choice: ");
             String input = scn.nextLine();
             int choice;
 
+            while (playerHp > 0) {
+            System.out.println("Enter your username: ");
+             pName = scn.nextLine();
             try {
                 choice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid choice, try again.");
+                System.out.println(RED + "Invalid choice, try again.");
                 continue;
             }
 
@@ -44,14 +66,15 @@ public class MainGame {
                     scn.nextLine();
                 }
                 case 2 -> {
-                    System.out.println("Exiting game... Goodbye!");
+                    System.out.println(PINK + "Exiting game... Goodbye!");
                     return;
                 }
                 default -> {
-                    System.out.println("Invalid choice, try again.");
+                    System.out.println(RED + "Invalid choice, try again.");
                 }
             }
         }
+    }
     }
 
     private static void gameStart() {
@@ -59,11 +82,12 @@ public class MainGame {
             System.out.println("");
             System.out.println(travel.getAreaMessage() + travel.tileCheck() + "");
             player.weaponSpawn(travel.getAreaCounter());
-            monsterSpawned(); // Spawn Monster when moving tiles
+            monsterSpawned(); //Spawn Monster when moving tiles
+            System.out.println("");
             System.out.println("What would you like to do right now?");
             System.out.println("");
-            System.out.println("Players's HP: ");
-            System.out.println("// Walk // Sako (Check Inventory) // Exit (Main Menu) //");
+            System.out.println(CYAN + pName +" HP: " + GREEN + getPlayerHealthBar(playerHp) + RESET);
+            System.out.println("//" + GREEN +" Walk "+ RESET + "//" + YELLOW+ "Sako (Check Inventory)" +RESET+"//"+RED+" Exit (Main Menu)"+RESET+" //");
             System.out.print("Your Action: ");
             String action = scn.next();
 
@@ -83,14 +107,14 @@ public class MainGame {
         }
     }
 
-    // Function to randomly spawn random monster from specific area
+    //Function to randomly spawn random monster from specific area
     private static void monsterSpawned() {
-        // 1 in 3 chance for monster to spawn.
-        if (rand.nextInt(3) > 0) { // When 0 is generated, monster will be spawned.
+        //1 in 3 chance for monster to spawn.
+        if (rand.nextInt(3) > 0) { //When 0 is generated, monster will be spawned.
             return;
         }
-
-        // randomly picks monster and starts battle
+        
+        //randomly picks monster and starts battle
         switch (travel.getAreaCounter()) {
             case 1 -> {
                 Monster woodsMon = Monster.woodMonsters.get(rand.nextInt(Monster.woodMonsters.size())); // Woods
@@ -134,12 +158,12 @@ public class MainGame {
         }
     }
 
-    // Function to start battle with monster as parameter
+    //Function to start battle with monster as parameter
     private static void startBattle(Monster monster) {
-        System.out.println("\n" + monster.getName() + " appeared!");
-        BattleEncounter battle = new BattleEncounter(player, monster, travel, inventory);
-        battle.startBattle();
-    }
+    System.out.println("\n" + monster.getName() + " appeared!");
+    BattleEncounter battle = new BattleEncounter(player, monster, travel, inventory); 
+    battle.startBattle();
+}
 
     private static void checkBoss() {
         if (travel.getAreaCounter() == 4 && travel.getTileCounter() == 1) {// Area 4 Tile 1 is the beginning of the Boss
@@ -160,10 +184,10 @@ public class MainGame {
                         choosing = false;
                         System.out.println(
                                 "\"You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\\n"
-                                        + //
-                                        "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
-                                        + //
-                                        "Exhausted but determined, you brandish your weapom.\"");
+                                + //
+                                "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
+                                + //
+                                "Exhausted but determined, you brandish your weapom.\"");
                         // INSERT OPTIONAL BOSS BATTLE
                     }
                     case "no" -> {
@@ -179,7 +203,9 @@ public class MainGame {
 
     private static void goHome() {
         System.out.println("You went home.");
-    }
+    
 
-    // END OF CLASS
+
+//END OF CLASS    
+}
 }
