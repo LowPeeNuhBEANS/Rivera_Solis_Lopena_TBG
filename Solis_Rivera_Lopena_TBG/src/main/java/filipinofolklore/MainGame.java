@@ -3,6 +3,7 @@ package filipinofolklore;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class MainGame {
 
     private static final Random rand = new Random();
