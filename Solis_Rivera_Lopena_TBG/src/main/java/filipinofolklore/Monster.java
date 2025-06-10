@@ -37,6 +37,7 @@ public class Monster extends Character {
     public static final Monster kapre = new Monster("Kapre", 100, 20, 20, 2, 5);
 
     // SWAMP
+
     public static final Monster berberoka = new Monster("Berberoka", 150, 20, 30, 1, 10);
     public static final Monster siyokoy = new Monster("Siyokoy", 150, 20, 30, 5, 10);
     public static final Monster mutatedCarabao = new Monster("Mutated Carabao", 150, 20, 30, 1, 15);
@@ -47,8 +48,8 @@ public class Monster extends Character {
     public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 2, 20);
     public static final Monster diwata = new Monster("Diwata", 200, 30, 40, 2, 20);
 
-
     // Like weaponSpawn in Player.java, each arraylist will have a spwan chances  
+
     public static final ArrayList<Monster> woodMonsters = new ArrayList<Monster>() {
         {
             add(sigbin);
@@ -60,14 +61,14 @@ public class Monster extends Character {
         {
             add(berberoka);
             add(siyokoy);
-            add(mutatedCarabao);
+            add(santelmo);
         }
     };
 
     public static final ArrayList<Monster> villageMonsters = new ArrayList<Monster>() {
         {
             add(manananggal);
-            add(sarangay);
+            add(tikbalang);
             add(tiyanak);
             add(diwata);
         }
@@ -83,10 +84,6 @@ public class Monster extends Character {
 
     public int attack() {
         return getAttack();
-    }
-
-    public void takeDamage(int Damage) {
-        super.takeDamage(Damage);
     }
 
     public String getName() {

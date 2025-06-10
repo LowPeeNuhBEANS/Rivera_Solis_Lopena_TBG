@@ -151,8 +151,8 @@ public class BattleEncounter {
             if (monster.getName().equals("Siyokoy")) {
                 MonsterSkill.siyokoySkill(monster, player);
             }
-            if (monster.getName().equals("Mutated Carabao")) {
-                MonsterSkill.mutatedCarabaoSkill(monster, player);
+            if (monster.getName().equals("Santelmo")) {
+                MonsterSkill.santelmoSkill(monster, player);
             }
         }
 
@@ -161,8 +161,8 @@ public class BattleEncounter {
             if (monster.getName().equals("Manananggal")) {
                 MonsterSkill.manananggalSkill(monster, player);
             }
-            if (monster.getName().equals("Sarangay")) {
-                MonsterSkill.sarangaySkill(monster, player);
+            if (monster.getName().equals("Tikbalang")) {
+                MonsterSkill.tikbalangSkill(monster, player);
             }
             if (monster.getName().equals("Tiyanak")) {
                 MonsterSkill.tiyanakSkill(monster, player);
