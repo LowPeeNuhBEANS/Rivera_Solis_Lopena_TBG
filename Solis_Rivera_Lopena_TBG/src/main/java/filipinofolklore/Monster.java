@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Monster extends Character {
     // private int health;
-    
 
     public Monster(String name, int health, int minATK, int maxATK, double speed) {
         super(name, health, minATK, maxATK, speed);
@@ -39,13 +38,19 @@ public class Monster extends Character {
     // SWAMP
     public static final Monster berberoka = new Monster("Berberoka", 150, 10, 20, 10);
     public static final Monster siyokoy = new Monster("Siyokoy", 150, 10, 20, 10);
-    public static final Monster mutatedCarabao = new Monster("Mutated Carabao", 150, 15,20, 15);
+    public static final Monster santelmo = new Monster("Santelmo", 150, 15, 20, 15);
 
     // VILLAGE
     public static final Monster manananggal = new Monster("Manananggal", 200, 20, 30, 15);
-    public static final Monster sarangay = new Monster("Sarangay", 200, 20, 30, 15);
+    public static final Monster tikbalang = new Monster("Tikbalang", 200, 20, 30, 15);
     public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 35, 20);
     public static final Monster bruha = new Monster("Bruha", 200, 30, 35, 20);
+
+    // MOUNTAIN
+    public static final Monster minokawa = new Monster("Minokawa", 200, 30, 35, 30);
+
+    // OCEAN
+    public static final Monster bakunawa = new Monster("Bakunawa", 200, 30, 35, 30);
 
     // Like weaponSpawn in Player.java, each arraylist will have a spwan chances
     public static final ArrayList<Monster> woodMonsters = new ArrayList<Monster>() {
@@ -59,14 +64,14 @@ public class Monster extends Character {
         {
             add(berberoka);
             add(siyokoy);
-            add(mutatedCarabao);
+            add(santelmo);
         }
     };
 
     public static final ArrayList<Monster> villageMonsters = new ArrayList<Monster>() {
         {
             add(manananggal);
-            add(sarangay);
+            add(tikbalang);
             add(tiyanak);
             add(bruha);
         }
@@ -87,10 +92,6 @@ public class Monster extends Character {
     public int attack() {
         return getAttack();
     }
-
-    // public int takeDamage(int damage) {
-    //     return health -= damage;
-    // }
 
     public String getName() {
         return super.getName();
