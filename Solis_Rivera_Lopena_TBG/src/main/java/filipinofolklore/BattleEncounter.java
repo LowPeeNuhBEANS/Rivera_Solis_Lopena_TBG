@@ -6,12 +6,26 @@ public class BattleEncounter {
     private Player player;
     private Monster monster;
     private Travel travel;
+    private Inventory inventory;
     private Scanner sc = new Scanner(System.in);
 
-    public BattleEncounter(Player player, Monster monster, Travel travel) {
+    public BattleEncounter(Player player, Monster monster, Travel travel, Inventory inventory) {
         this.player = player;
         this.monster = monster;
         this.travel = travel;
+        this.inventory = inventory;
+    }
+
+    static String getHealthBar(int hp) {
+        int totalBars = 20;
+        int bars = Math.max(0, (int) Math.round(hp / 5.0));
+        StringBuilder bar = new StringBuilder("[");
+        for (int i = 0; i < bars; i++)
+            bar.append("|");
+        for (int i = bars; i < totalBars; i++)
+            bar.append(" ");
+        bar.append("]");
+        return bar.toString();
     }
 
     public void startBattle() {
@@ -20,8 +34,21 @@ public class BattleEncounter {
         while (player.isAlive() && monster.isAlive()) {
             if (playerFirst) {
                 // Player's turn
-                System.out.println("\nYour turn! (Type 'attack' to attack)");
+                System.out.println("What would you like to do right now?\n");
+
+                // PRINT HERE: HEALTH BARS
+                System.out.println("Players's HP: ");
+                System.out.println(getHealthBar(player.getHp()));
+
+                System.out.println(monster.getName() + "'s HP: ");
+                System.out.println(getHealthBar(monster.getHp()));
+
+                System.out.println("\n// Attack // Sako (Check Inventory) // Parry //");
+                System.out.print("Your Action: ");
+                
+                // TO DO: Implement a catch for user input errors
                 String input = sc.nextLine();
+
                 if (input.equalsIgnoreCase("attack")) {
                     // get the weapon
                     Weapon weapon = Player.getEquippedWeapon();
@@ -36,6 +63,13 @@ public class BattleEncounter {
                     monster.takeDamage(damage);
                     System.out.println("You attack " + monster.getName() + " for " + damage
                             + " damage! (Weapon: " + weapon.getName() + " dealt " + weaponDamage + ")");
+
+                    // PRINT HERE: HEALTH BARS
+                    System.out.println("Players's HP: ");
+                    System.out.println(getHealthBar(player.getHp()));
+
+                    System.out.println(monster.getName() + "'s HP: ");
+                    System.out.println(getHealthBar(monster.getHp()));
                 }
                 if (!monster.isAlive()) {
                     break;
@@ -49,10 +83,22 @@ public class BattleEncounter {
                 }
 
                 // Player's turn
-                System.out.println("\nYour turn! (Type 'attack' to attack)");
+                // PRINT HERE: HEALTH BARS
+                System.out.println("Players's HP: ");
+                System.out.println(getHealthBar(player.getHp()));
+
+                System.out.println(monster.getName() + "'s HP: ");
+                System.out.println(getHealthBar(monster.getHp()));
+
+                System.out.println("\nYour turn!");
+                System.out.println("// Attack // Sako (Check Inventory) // Parry //");
+                System.out.print("Your Action: ");
+
+                // TO DO: Implement a catch for user input errors 
                 String input = sc.nextLine();
+
                 if (input.equalsIgnoreCase("attack")) {
-                    // get the weapon
+                    // get ww
                     Weapon weapon = Player.getEquippedWeapon();
                     int weaponDamage = 0;
                     if (weapon != null) {
@@ -65,6 +111,13 @@ public class BattleEncounter {
                     monster.takeDamage(damage);
                     System.out.println("You attack " + monster.getName() + " for " + damage
                             + " damage! (Weapon: " + weapon.getName() + " dealt " + weaponDamage + ")");
+
+                    // PRINT HERE: HEALTH BARS
+                    System.out.println("Players's HP: ");
+                    System.out.println(getHealthBar(player.getHp()));
+
+                    System.out.println(monster.getName() + "'s HP: ");
+                    System.out.println(getHealthBar(monster.getHp()));
                 }
             }
         }
@@ -86,36 +139,36 @@ public class BattleEncounter {
                 MonsterSkill.sigbinSkill(monster, player);
             }
             if (monster.getName().equals("Kapre")) {
-                MonsterSkill.sigbinSkill(monster, player);
+                MonsterSkill.kapreSkill(monster, player);
             }
         }
 
         // Swamp
         if (travel.getAreaCounter() == 2) {
             if (monster.getName().equals("Berberoka")) {
-                MonsterSkill.sigbinSkill(monster, player);
+                MonsterSkill.berberokaSkill(monster, player);
             }
             if (monster.getName().equals("Siyokoy")) {
-                MonsterSkill.sigbinSkill(monster, player);
+                MonsterSkill.siyokoySkill(monster, player);
             }
             if (monster.getName().equals("Mutated Carabao")) {
-                MonsterSkill.sigbinSkill(monster, player);
+                MonsterSkill.mutatedCarabaoSkill(monster, player);
             }
         }
 
         // Village
         if (travel.getAreaCounter() == 3) {
             if (monster.getName().equals("Manananggal")) {
-                MonsterSkill.sigbinSkill(monster, player);
+                MonsterSkill.manananggalSkill(monster, player);
             }
             if (monster.getName().equals("Sarangay")) {
-                MonsterSkill.sigbinSkill(monster, player);
+                MonsterSkill.sarangaySkill(monster, player);
             }
             if (monster.getName().equals("Tiyanak")) {
-                MonsterSkill.sigbinSkill(monster, player);
+                MonsterSkill.tiyanakSkill(monster, player);
             }
-            if (monster.getName().equals("Diwata")) {
-                MonsterSkill.sigbinSkill(monster, player);
+            if (monster.getName().equals("Bruha")) {
+                MonsterSkill.bruhaSkill(monster, player);
             }
         }
 

@@ -59,7 +59,7 @@ public class MainGame {
             System.out.println("");
             System.out.println(travel.getAreaMessage() + travel.tileCheck() + "");
             player.weaponSpawn(travel.getAreaCounter());
-            monsterSpawned(); //Spawn Monster when moving tiles
+            monsterSpawned(); // Spawn Monster when moving tiles
             System.out.println("What would you like to do right now?");
             System.out.println("");
             System.out.println("Players's HP: ");
@@ -83,14 +83,14 @@ public class MainGame {
         }
     }
 
-    //Function to randomly spawn random monster from specific area
+    // Function to randomly spawn random monster from specific area
     private static void monsterSpawned() {
-        //1 in 3 chance for monster to spawn.
-        if (rand.nextInt(3) > 0) { //When 0 is generated, monster will be spawned.
+        // 1 in 3 chance for monster to spawn.
+        if (rand.nextInt(3) > 0) { // When 0 is generated, monster will be spawned.
             return;
         }
-        
-        //randomly picks monster and starts battle
+
+        // randomly picks monster and starts battle
         switch (travel.getAreaCounter()) {
             case 1 -> {
                 Monster woodsMon = Monster.woodMonsters.get(rand.nextInt(Monster.woodMonsters.size())); // Woods
@@ -110,12 +110,12 @@ public class MainGame {
         }
     }
 
-    //Function to start battle with monster as parameter
+    // Function to start battle with monster as parameter
     private static void startBattle(Monster monster) {
-    System.out.println("\n" + monster.getName() + " appeared!");
-    BattleEncounter battle = new BattleEncounter(player, monster, travel); 
-    battle.startBattle();
-}
+        System.out.println("\n" + monster.getName() + " appeared!");
+        BattleEncounter battle = new BattleEncounter(player, monster, travel, inventory);
+        battle.startBattle();
+    }
 
     private static void checkBoss() {
         if (travel.getAreaCounter() == 4 && travel.getTileCounter() == 1) {// Area 4 Tile 1 is the beginning of the Boss
@@ -136,10 +136,10 @@ public class MainGame {
                         choosing = false;
                         System.out.println(
                                 "\"You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\\n"
-                                + //
-                                "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
-                                + //
-                                "Exhausted but determined, you brandish your weapom.\"");
+                                        + //
+                                        "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
+                                        + //
+                                        "Exhausted but determined, you brandish your weapom.\"");
                         // INSERT OPTIONAL BOSS BATTLE
                     }
                     case "no" -> {
