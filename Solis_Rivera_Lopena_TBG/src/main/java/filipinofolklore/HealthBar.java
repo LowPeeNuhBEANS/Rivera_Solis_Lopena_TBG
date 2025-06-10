@@ -4,16 +4,17 @@ import java.util.Stack;
 
 public class HealthBar {
     private Stack<String> healthStack;
-    private int maxHealth;
-
+    private int divHealth;
+    private static Stack<String> emptyHealth = new Stack();
+    
     public HealthBar(int maxHealth) {
-        this.maxHealth = maxHealth;
+        this.divHealth = maxHealth/10;
         healthStack = new Stack<>();
         initializeHealth();
     }
 
     private void initializeHealth() {
-        for (int i = 0; i < maxHealth; i++) {
+        for (int i = 0; i < divHealth; i++) {
             healthStack.push("█");
         }
     }
@@ -21,28 +22,28 @@ public class HealthBar {
     public void takeDamage(int damage) {
         for (int i = 0; i < damage && !healthStack.isEmpty(); i++) {
             healthStack.pop();
+            emptyHealth.push(" ");
         }
         displayHealth();
     }
 
     public void heal(int amount) {
-        for (int i = 0; i < amount && healthStack.size() < maxHealth; i++) {
+        for (int i = 0; i < amount && healthStack.size() < divHealth; i++) {
             healthStack.push("█");
+            emptyHealth.pop();
         }
         displayHealth();
     }
 
     public void displayHealth() {
-        System.out.print("Health: [");
+        System.out.print(" [");
         for (String segment : healthStack) {
             System.out.print(segment);
         }
+        for (String loss : emptyHealth) {
+            System.out.print(" ");
+        }
         System.out.println("]");
     }
-
-    public static void main(String[] args) {
-        HealthBar healthBar = new HealthBar(10); //Set max health to 10
-        healthBar.displayHealth();
-    }
-
 }
+
