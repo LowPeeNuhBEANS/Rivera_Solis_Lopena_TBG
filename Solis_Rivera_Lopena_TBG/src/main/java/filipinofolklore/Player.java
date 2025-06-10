@@ -10,11 +10,11 @@ public class Player {
     int atkDmg = 25;
     int health = 100;
 
-    private static final Inventory = new Inventory();
+    private final Inventory inventory = new Inventory();
     private static final Random randy = new Random();
     private static final Scanner scn = new Scanner(System.in);
     private static Weapon equipped;
-    private static HealthBar healthBar = new HealthBar(health);
+    private HealthBar healthBar = new HealthBar(health);
 
     private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); // for woods weapons
     private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); // for swamp weapons
@@ -42,7 +42,9 @@ public class Player {
         health -= damage;
     }
 
-    
+    public void openInventory() {
+        inventory.showInventory(health);
+    }
 
     private void initWeapons() {
         // Default weapon
@@ -148,11 +150,11 @@ public class Player {
     }
 
     //Add item to inventory test environment
-        public static void addItemToInventory(){ 
+    public static void addItemToInventory(){ 
         
     }
     //Player Health Bar
-        public void getPlayerHealthBar(){
+    public void getPlayerHealthBar(){
         healthBar.displayHealth();
     }
 }

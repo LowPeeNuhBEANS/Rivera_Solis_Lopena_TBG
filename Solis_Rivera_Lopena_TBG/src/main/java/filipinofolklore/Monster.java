@@ -40,11 +40,11 @@ public class Monster extends Character {
 
     public static final Monster berberoka = new Monster("Berberoka", 150, 20, 30, 1, 10);
     public static final Monster siyokoy = new Monster("Siyokoy", 150, 20, 30, 5, 10);
-    public static final Monster mutatedCarabao = new Monster("Mutated Carabao", 150, 20, 30, 1, 15);
+    public static final Monster santelmo = new Monster("Mutated Carabao", 150, 20, 30, 1, 15);
 
     // VILLAGE
     public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40, 2, 15);
-    public static final Monster sarangay = new Monster("Sarangay", 200, 30, 40, 2, 15);
+    public static final Monster tikbalang = new Monster("Sarangay", 200, 30, 40, 2, 15);
     public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 2, 20);
     public static final Monster diwata = new Monster("Diwata", 200, 30, 40, 2, 20);
 

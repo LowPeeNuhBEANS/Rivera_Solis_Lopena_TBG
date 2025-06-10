@@ -1,13 +1,12 @@
 package filipinofolklore;
 
 import java.util.HashMap;
-import java.util.Stack;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Inventory {
 
-    int playerHp = 100;
-
+    private static int health;
     private static final Scanner scn = new Scanner(System.in); //Scanner for input
     private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); //Hashmap for Item Name and Health Points
 
@@ -32,7 +31,8 @@ public class Inventory {
     }
 
     //Shows prompts to interact with inventory
-    public void showInventory() {
+    public void showInventory(int playerHealth) {
+        health = playerHealth;
         boolean inSako = true;
         while (inSako) {
 
@@ -76,7 +76,7 @@ public class Inventory {
             choice.equalsIgnoreCase("maruya") ||
             choice.equalsIgnoreCase("bingka") ||
             choice.equalsIgnoreCase("panyawan") ||
-            choice.equalsIgnoreCase("gabon") ||) {
+            choice.equalsIgnoreCase("gabon")) {
                 itemName = choice.toLowerCase();
             }
         return itemName;
@@ -98,7 +98,6 @@ public class Inventory {
     }
 
     //Use item to regain health
-    //NOTE: TO BE PAIRED WITH ACTUAL PLAYER'S HEALTH
     private void use(String itemName) {
         if (itemName == null) {
             System.out.println("Invalid item choice.");
@@ -108,20 +107,9 @@ public class Inventory {
         Stack<Integer> food = items.get(itemName);
         if (food != null && !food.isEmpty()) {
             System.out.println(itemName + " consumed! You restored " + food.peek() + " health.");
-            playerHp += food.pop();
+            health += food.pop();
         } else {
             System.out.println("No more " + itemName + " left!");
-        }
-    }
-
-//FOR TESTING! CHECKER
-    private void addItem(String itemName, int value) {
-        Stack<Integer> stack = items.getOrDefault(itemName, new Stack<>());
-        if (stack.size() >= 5) {
-            System.out.println("Cannot add more " + itemName + ". Maximum of 5 reached!");
-        } else {
-            stack.push(value);
-            items.put(itemName, stack);
         }
     }
 }
