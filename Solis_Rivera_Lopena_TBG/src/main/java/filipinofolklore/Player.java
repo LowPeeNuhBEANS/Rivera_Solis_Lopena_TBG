@@ -6,6 +6,7 @@ public class Player {
     int atkDmg = 25;
     int health = 100;
 
+    private String name;
     private final WeaponHandler weaponHandler = new WeaponHandler();
     private final Inventory inventory = new Inventory();
     private static Weapon equipped = new Weapon("Stick", 5, 20, 20);
@@ -13,6 +14,14 @@ public class Player {
 
     public Player() {
 
+    }
+
+    public Player(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean isAlive() {
@@ -27,7 +36,6 @@ public class Player {
         return atkDmg;
     }
 
-
     public void takeDamage(int damage) {
         health -= damage;
     }
@@ -36,8 +44,9 @@ public class Player {
         inventory.showInventory(health);
     }
 
-    //To equip a new weapon, weaponHandler spawns a new weapon for the player
-    //The current weapon depends on whether the player took the spawned weapon or not
+    // To equip a new weapon, weaponHandler spawns a new weapon for the player
+    // The current weapon depends on whether the player took the spawned weapon or
+    // not
     public void spawnWeapons(int area) {
         equipped = weaponHandler.weaponSpawn(area, equipped);
     }
@@ -48,16 +57,17 @@ public class Player {
 
     public String getWeaponName() {
         return equipped.getName();
-    }    
-
-    //Add item to inventory test environment
-    public static void addItemToInventory(){ 
-        
     }
-    //Player Health Bar
-    public void getPlayerHealthBar(){
+
+    // Add item to inventory test environment
+    public static void addItemToInventory() {
+
+    }
+
+    // Player Health Bar
+    public void getPlayerHealthBar() {
         healthBar.displayHealth();
     }
 }
 
-//END OF CLASS    
+// END OF CLASS
