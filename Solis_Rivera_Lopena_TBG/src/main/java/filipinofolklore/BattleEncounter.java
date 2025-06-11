@@ -55,14 +55,7 @@ public class BattleEncounter {
                     player.getPlayerHealthBar();
 
                     System.out.println(monster.getName() + "'s HP: ");
-<<<<<<< HEAD
-                    System.out.println(getHealthBar(monster.getHp()));
-
-                } else if (input.equalsIgnoreCase("sako")) {
-                    inventory.showInventory();
-=======
                     monster.getHealthBar();
->>>>>>> upstream/main
                 }
                 if (!monster.isAlive()) {
                     break;
@@ -109,14 +102,7 @@ public class BattleEncounter {
                     player.getPlayerHealthBar();
 
                     System.out.println(monster.getName() + "'s HP: ");
-<<<<<<< HEAD
-                    System.out.println(getHealthBar(monster.getHp()));
-
-                } else if (input.equalsIgnoreCase("sako")) {
-                    inventory.showInventory();
-=======
                     monster.getHealthBar();
->>>>>>> upstream/main
                 }
             }
         }

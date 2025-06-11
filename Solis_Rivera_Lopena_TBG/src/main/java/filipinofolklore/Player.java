@@ -1,7 +1,5 @@
 package filipinofolklore;
 
-import java.util.LinkedList;
-
 public class Player {
 
     int atkSpeed = 30;
@@ -12,10 +10,6 @@ public class Player {
     private final Inventory inventory = new Inventory();
     private static Weapon equipped = new Weapon("Stick", 5, 20, 20);
     private HealthBar healthBar = new HealthBar(health);
-
-    private static LinkedList<Weapon> woodsWeapon = new LinkedList<>(); // for woods weapons
-    private static LinkedList<Weapon> swampWeapon = new LinkedList<>(); // for swamp weapons
-    private static LinkedList<Weapon> villageWeapon = new LinkedList<>(); // for village weapons
 
     public Player() {
 

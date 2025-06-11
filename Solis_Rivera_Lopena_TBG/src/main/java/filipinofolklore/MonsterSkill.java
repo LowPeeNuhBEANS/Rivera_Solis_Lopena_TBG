@@ -132,7 +132,7 @@ public class MonsterSkill {
         // Once Minokawa reaches his 5th succeeding attack, Minokawa will deal 2x the
         // damage from then on.
         int damage;
-        double multiplier = 1.0;
+        double multiplier;
 
         switch (minokawaAttackCounter) {
             case 0:
