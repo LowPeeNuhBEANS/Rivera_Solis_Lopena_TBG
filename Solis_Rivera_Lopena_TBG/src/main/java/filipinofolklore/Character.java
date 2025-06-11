@@ -3,11 +3,13 @@ package filipinofolklore;
 import java.util.Random;
 
 public class Character {
+
     protected String name;
     protected int health;
     protected int minATK;
     protected int maxATK;
     protected double speed;
+    private HealthBar healthBar;
 
     public Character(String name, int health, int minATK, int maxATK, double speed) {
         this.name = name;
@@ -15,6 +17,7 @@ public class Character {
         this.minATK = minATK;
         this.maxATK = maxATK;
         this.speed = speed;
+        healthBar = new HealthBar(health);
     }
 
     public void takeDamage(int damage) {
@@ -52,5 +55,9 @@ public class Character {
 
     public double getSpeed() {
         return speed;
+    }
+
+    public void getHealthBar() {
+        healthBar.displayHealth();
     }
 }
