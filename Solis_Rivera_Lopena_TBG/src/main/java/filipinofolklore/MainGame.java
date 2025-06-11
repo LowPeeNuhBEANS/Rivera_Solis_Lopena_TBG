@@ -124,24 +124,31 @@ public class MainGame {
         //randomly picks monster and starts battle
         switch (travel.getAreaCounter()) {
             case 1 -> {
-                Monster woodsMon = Monster.woodMonsters.get(rand.nextInt(Monster.woodMonsters.size())); // Woods
-                startBattle(woodsMon);
-                if (!woodsMon.isAlive()) {
-                    Monster.woodMonsters.remove(woodsMon);
+                if (!Monster.woodMonsters.isEmpty()) {
+                    Monster woodsMon = Monster.woodMonsters.get(rand.nextInt(Monster.woodMonsters.size())); // Woods
+                    startBattle(woodsMon);
+                    if (!woodsMon.isAlive()) {
+                        Monster.woodMonsters.remove(woodsMon);
+                    }
                 }
             }
             case 2 -> {
-                Monster swampMon = Monster.swampMonsters.get(rand.nextInt(Monster.swampMonsters.size())); // Swamp
-                startBattle(swampMon);
-                if (!swampMon.isAlive()) {
-                    Monster.swampMonsters.remove(swampMon);
+                if (!Monster.swampMonsters.isEmpty()) {
+                    Monster swampMon = Monster.swampMonsters.get(rand.nextInt(Monster.swampMonsters.size())); // Swamp
+                    startBattle(swampMon);
+                    if (!swampMon.isAlive()) {
+                        Monster.swampMonsters.remove(swampMon);
+                    }
                 }
             }
+
             case 3 -> {
-                Monster villageMon = Monster.villageMonsters.get(rand.nextInt(Monster.villageMonsters.size())); // Village
-                startBattle(villageMon);
-                if (!villageMon.isAlive()) {
-                    Monster.villageMonsters.remove(villageMon);
+                if (!Monster.villageMonsters.isEmpty()) {
+                    Monster villageMon = Monster.villageMonsters.get(rand.nextInt(Monster.villageMonsters.size())); // Village
+                    startBattle(villageMon);
+                    if (!villageMon.isAlive()) {
+                        Monster.villageMonsters.remove(villageMon);
+                    }
                 }
             }
             default -> {
@@ -181,6 +188,7 @@ public class MainGame {
                                 + //
                                 "Exhausted but determined, you brandish your weapom.\"");
                         // INSERT OPTIONAL BOSS BATTLE
+                        goHome();
                     }
                     case "no" -> {
                         choosing = false;
@@ -195,6 +203,7 @@ public class MainGame {
 
     private static void goHome() {
         System.out.println("You went home.");
+        inGame = false;
 
 //END OF CLASS    
     }

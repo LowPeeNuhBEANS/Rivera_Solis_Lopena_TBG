@@ -3,29 +3,16 @@ package filipinofolklore;
 import java.util.Scanner;
 
 public class BattleEncounter {
+
     private Player player;
     private Monster monster;
     private Travel travel;
-    private Inventory inventory;
     private Scanner sc = new Scanner(System.in);
 
-    public BattleEncounter(Player player, Monster monster, Travel travel, Inventory inventory) {
+    public BattleEncounter(Player player, Monster monster, Travel travel) {
         this.player = player;
         this.monster = monster;
         this.travel = travel;
-        this.inventory = inventory;
-    }
-
-    static String getHealthBar(int hp) {
-        int totalBars = 20;
-        int bars = Math.max(0, (int) Math.round(hp / 5.0));
-        StringBuilder bar = new StringBuilder("[");
-        for (int i = 0; i < bars; i++)
-            bar.append("|");
-        for (int i = bars; i < totalBars; i++)
-            bar.append(" ");
-        bar.append("]");
-        return bar.toString();
     }
 
     public void startBattle() {
@@ -38,14 +25,14 @@ public class BattleEncounter {
 
                 // PRINT HERE: HEALTH BARS
                 System.out.println("Players's HP: ");
-                System.out.println(getHealthBar(player.getHp()));
+                player.getPlayerHealthBar();
 
                 System.out.println(monster.getName() + "'s HP: ");
-                System.out.println(getHealthBar(monster.getHp()));
+                monster.getHealthBar();
 
                 System.out.println("\n// Attack // Sako (Check Inventory) // Parry //");
                 System.out.print("Your Action: ");
-                
+
                 // TO DO: Implement a catch for user input errors
                 String input = sc.nextLine();
 
@@ -62,14 +49,14 @@ public class BattleEncounter {
                     int damage = player.attack() + weaponDamage; // player attack + weapon damage
                     monster.takeDamage(damage);
                     System.out.println("You attack " + monster.getName() + " for " + damage
-                            + " damage! (Weapon: " + weapon.getName() + " dealt " + weaponDamage + ")");
+                            + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage + ")");
 
                     // PRINT HERE: HEALTH BARS
                     System.out.println("Players's HP: ");
-                    System.out.println(getHealthBar(player.getHp()));
+                    player.getPlayerHealthBar();
 
                     System.out.println(monster.getName() + "'s HP: ");
-                    System.out.println(getHealthBar(monster.getHp()));
+                    monster.getHealthBar();
                 }
                 if (!monster.isAlive()) {
                     break;
@@ -85,10 +72,10 @@ public class BattleEncounter {
                 // Player's turn
                 // PRINT HERE: HEALTH BARS
                 System.out.println("Players's HP: ");
-                System.out.println(getHealthBar(player.getHp()));
+                player.getPlayerHealthBar();
 
                 System.out.println(monster.getName() + "'s HP: ");
-                System.out.println(getHealthBar(monster.getHp()));
+                monster.getHealthBar();
 
                 System.out.println("\nYour turn!");
                 System.out.println("// Attack // Sako (Check Inventory) // Parry //");
@@ -114,10 +101,10 @@ public class BattleEncounter {
 
                     // PRINT HERE: HEALTH BARS
                     System.out.println("Players's HP: ");
-                    System.out.println(getHealthBar(player.getHp()));
+                    player.getPlayerHealthBar();
 
                     System.out.println(monster.getName() + "'s HP: ");
-                    System.out.println(getHealthBar(monster.getHp()));
+                    monster.getHealthBar();
                 }
             }
         }

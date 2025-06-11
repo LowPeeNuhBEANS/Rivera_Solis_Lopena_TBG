@@ -1,8 +1,6 @@
 package filipinofolklore;
 
 import java.util.LinkedList;
-import java.util.Random;
-import java.util.Scanner;
 
 public class Player {
 
@@ -12,8 +10,6 @@ public class Player {
 
     private final WeaponHandler weaponHandler = new WeaponHandler();
     private final Inventory inventory = new Inventory();
-    private static final Random randy = new Random();
-    private static final Scanner scn = new Scanner(System.in);
     private static Weapon equipped = new Weapon("Stick", 5, 20, 20);
     private HealthBar healthBar = new HealthBar(health);
 
@@ -52,25 +48,13 @@ public class Player {
         equipped = weaponHandler.weaponSpawn(area, equipped);
     }
 
-    
-    // Health bar representation [TESTING]
-    public static String getHealthBar(int hp) {
-        int totalBars = 20;
-        int bars = Math.max(0, (int) Math.round(hp / 5.0));
-        StringBuilder bar = new StringBuilder("[");
-        for (int i = 0; i < bars; i++) {
-            bar.append("|");
-        }
-        for (int i = bars; i < totalBars; i++) {
-            bar.append(" ");
-        }
-        bar.append("]");
-        return bar.toString();
-    }
-
     public static Weapon getEquippedWeapon() {
         return equipped;
     }
+
+    public String getWeaponName() {
+        return equipped.getName();
+    }    
 
     //Add item to inventory test environment
     public static void addItemToInventory(){ 

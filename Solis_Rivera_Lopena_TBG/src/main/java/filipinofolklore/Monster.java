@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 public class Monster extends Character {
 
-    private HealthBar healthBar;
-
-    public Monster(String name, int health, int minATK, int maxATK, double armor, double speed) {
-        super(name, health, minATK, maxATK, armor, speed);
+    public Monster(String name, int health, int minATK, int maxATK, double speed) {
+        super(name, health, minATK, maxATK, speed);
         this.name = super.name;
-        this.healthBar = new HealthBar(health);
     }
 
     /*
@@ -33,20 +30,20 @@ public class Monster extends Character {
      */
 
     // WOODS
-    public static final Monster sigbin = new Monster("Sigbin", 100, 10, 20, 1, 5);
-    public static final Monster kapre = new Monster("Kapre", 100, 20, 20, 2, 5);
+    public static final Monster sigbin = new Monster("Sigbin", 100, 10, 20, 5);
+    public static final Monster kapre = new Monster("Kapre", 100, 20, 20, 5);
 
     // SWAMP
 
-    public static final Monster berberoka = new Monster("Berberoka", 150, 20, 30, 1, 10);
-    public static final Monster siyokoy = new Monster("Siyokoy", 150, 20, 30, 5, 10);
-    public static final Monster santelmo = new Monster("Mutated Carabao", 150, 20, 30, 1, 15);
+    public static final Monster berberoka = new Monster("Berberoka", 150, 20, 30, 10);
+    public static final Monster siyokoy = new Monster("Siyokoy", 150, 20, 30, 10);
+    public static final Monster santelmo = new Monster("Mutated Carabao", 150, 20, 30, 15);
 
     // VILLAGE
-    public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40, 2, 15);
-    public static final Monster tikbalang = new Monster("Sarangay", 200, 30, 40, 2, 15);
-    public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 2, 20);
-    public static final Monster diwata = new Monster("Diwata", 200, 30, 40, 2, 20);
+    public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40,15);
+    public static final Monster tikbalang = new Monster("Sarangay", 200, 30, 40, 15);
+    public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 20);
+    public static final Monster diwata = new Monster("Diwata", 200, 30, 40, 20);
 
     // Like weaponSpawn in Player.java, each arraylist will have a spwan chances  
 
@@ -90,7 +87,4 @@ public class Monster extends Character {
         return super.getName();
     }
 
-    public HealthBar getMonsterHealthBar() {
-        return healthBar;
-    }
 }
