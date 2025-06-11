@@ -15,7 +15,7 @@ public class BattleEncounter {
         this.travel = travel;
     }
 
-    public void startBattle() {
+    public boolean startBattle() {
         // player's turn if player's atkSpeed is greater than or equal to monster's
         boolean playerFirst = player.getAtkSpeed() >= monster.getAtkSpeed();
         while (player.isAlive() && monster.isAlive()) {
@@ -24,93 +24,130 @@ public class BattleEncounter {
                 System.out.println("What would you like to do right now?\n");
 
                 // PRINT HERE: HEALTH BARS
-                System.out.println("Players's HP: ");
+                System.out.println(player.getName() + "'s HP: ");
                 player.getPlayerHealthBar();
 
                 System.out.println(monster.getName() + "'s HP: ");
                 monster.getHealthBar();
 
-                System.out.println("\n// Attack // Sako (Check Inventory) // Parry //");
-                System.out.print("Your Action: ");
+                boolean validInput = false;
+                while (!validInput) {
+                    System.out.println("\n// Attack // Sako (Check Inventory) // Parry //");
+                    System.out.print("Your Action: ");
+                    String input = sc.nextLine();
+                    switch (input.toLowerCase()) {
+                        case "attack" -> {
+                            Weapon weapon = Player.getEquippedWeapon();
+                            int weaponDamage = 0;
+                            if (weapon != null) {
+                                weaponDamage = weapon.getMin()
+                                        + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
+                            }
+                            int damage = player.attack() + weaponDamage;
+                            monster.takeDamage(damage);
+                            System.out.println("You attack " + monster.getName() + " for " + damage
+                                    + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage + ")\n");
 
-                // TO DO: Implement a catch for user input errors
-                String input = sc.nextLine();
-                
-                if (input.equalsIgnoreCase("attack")) {
-                    // get weapon
-                    Weapon weapon = Player.getEquippedWeapon();
-                    int weaponDamage = 0;
-                    if (weapon != null) {
-                        // randomize weapon damage
-                        weaponDamage = weapon.getMin()
-                                + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
+                            // System.out.println(player.getName() + "'s HP: ");
+                            // player.getPlayerHealthBar();
+                            // System.out.println(monster.getName() + "'s HP: ");
+                            // monster.getHealthBar();
+
+                            if (!monster.isAlive()) {
+                                // automatic end
+                            } else {
+                                monsterTurn();
+                            }
+                            validInput = true;
+                        }
+                        case "sako" -> {
+                            validInput = true;
+                        }
+                        case "parry" -> {
+                            validInput = true;
+                        }
+                        default -> {
+                            System.out.println("Not a valid input. Please try again.\n");
+                            System.out.println(player.getName() + "'s HP: ");
+                            player.getPlayerHealthBar();
+
+                            System.out.println(monster.getName() + "'s HP: ");
+                            monster.getHealthBar();
+                        }
                     }
-                    int damage = player.attack() + weaponDamage; // player attack + weapon damage
-                    monster.takeDamage(damage);
-                    System.out.println("You attack " + monster.getName() + " for " + damage
-                            + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage + ")");
-
-                    // PRINT HERE: HEALTH BARS
-                    System.out.println("Players's HP: ");
-                    player.getPlayerHealthBar();
-
-                    System.out.println(monster.getName() + "'s HP: ");
-                    monster.getHealthBar();
                 }
-                if (!monster.isAlive()) {
-                    break;
-                }
-                monsterTurn();
             } else {
-                // Monster's turn
                 monsterTurn();
                 if (!player.isAlive()) {
                     break;
                 }
 
                 // Player's turn
-                // PRINT HERE: HEALTH BARS
-                System.out.println("Players's HP: ");
+                System.out.println(player.getName() + "'s HP: ");
                 player.getPlayerHealthBar();
 
                 System.out.println(monster.getName() + "'s HP: ");
                 monster.getHealthBar();
 
-                System.out.println("\nYour turn!");
-                System.out.println("// Attack // Sako (Check Inventory) // Parry //");
-                System.out.print("Your Action: ");
+                boolean validInput = false;
+                while (!validInput) {
+                    System.out.println("\nYour turn!");
+                    System.out.println("// Attack // Sako (Check Inventory) // Parry //");
+                    System.out.print("Your Action: ");
+                    String input = sc.nextLine();
+                    switch (input.toLowerCase()) {
+                        case "attack" -> {
+                            Weapon weapon = Player.getEquippedWeapon();
+                            int weaponDamage = 0;
+                            if (weapon != null) {
+                                weaponDamage = weapon.getMin()
+                                        + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
+                            }
+                            int damage = player.attack() + weaponDamage;
+                            monster.takeDamage(damage);
+                            System.out.println("You attack " + monster.getName() + " for " + damage
+                                    + " damage! (Weapon: " + player.getWeaponName() + " dealt " + weaponDamage + ")\n");
 
-                // TO DO: Implement a catch for user input errors
-                String input = sc.nextLine();
+                            // System.out.println(player.getName() + "'s HP: ");
+                            // player.getPlayerHealthBar();
+                            // System.out.println(monster.getName() + "'s HP: ");
+                            // monster.getHealthBar();
 
-                if (input.equalsIgnoreCase("attack")) {
-                    // get weapon
-                    Weapon weapon = Player.getEquippedWeapon();
-                    int weaponDamage = 0;
-                    if (weapon != null) {
-                        // randomize weapon damage
-                        weaponDamage = weapon.getMin()
-                                + (int) (Math.random() * (weapon.getMax() - weapon.getMin() + 1));
+                            if (!monster.isAlive()) {
+                                // automatic end
+                            } else {
+                                monsterTurn();
+                            }
+                            validInput = true;
+                        }
+                        case "sako" -> {
+                            validInput = true;
+                        }
+                        case "parry" -> {
+
+                            validInput = true;
+                        }
+                        default -> {
+                            System.out.println("Not a valid input. Please try again.\n");
+                            System.out.println(player.getName() + "'s HP: ");
+                            player.getPlayerHealthBar();
+
+                            System.out.println(monster.getName() + "'s HP: ");
+                            monster.getHealthBar();
+                        }
                     }
-                    int damage = player.attack() + weaponDamage; // player attack + weapon damage
-                    monster.takeDamage(damage);
-                    System.out.println("You attack " + monster.getName() + " for " + damage
-                            + " damage! (Weapon: " + weapon.getName() + " dealt " + weaponDamage + ")");
-
-                    // PRINT HERE: HEALTH BARS
-                    System.out.println("Players's HP: ");
-                    player.getPlayerHealthBar();
-
-                    System.out.println(monster.getName() + "'s HP: ");
-                    monster.getHealthBar();
                 }
             }
         }
 
         if (player.isAlive()) {
             System.out.println("You defeated " + monster.getName() + "!");
+            return true;
         } else {
             System.out.println("You were defeated by " + monster.getName() + "...");
+
+            gameOver();
+            return false;
         }
     }
 
@@ -170,5 +207,13 @@ public class BattleEncounter {
                 MonsterSkill.sigbinSkill(monster, player);
             }
         }
+    }
+
+    public static void gameOver(){
+        System.out.println("\nRIP BOZO\n");
+        System.out.println("You'll return to the Main Menu.\n");
+        // RETURN TO MAIN MENU
+        // System.exit(0);
+        // Maybe display player in-game statistics like in minecraft?
     }
 }
