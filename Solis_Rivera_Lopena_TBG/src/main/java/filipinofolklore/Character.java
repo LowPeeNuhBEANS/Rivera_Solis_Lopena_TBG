@@ -8,15 +8,17 @@ public class Character {
     protected int health;
     protected int minATK;
     protected int maxATK;
+    protected int id;
     protected double speed;
     private final HealthBar healthBar;
 
-    public Character(String name, int health, int minATK, int maxATK, double speed) {
+    public Character(String name, int health, int minATK, int maxATK, double speed, int id) {
         this.name = name;
         this.health = health;
         this.minATK = minATK;
         this.maxATK = maxATK;
         this.speed = speed;
+        this.id = id;
         healthBar = new HealthBar(health);
     }
 

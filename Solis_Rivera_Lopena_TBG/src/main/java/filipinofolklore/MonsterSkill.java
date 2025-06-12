@@ -3,32 +3,57 @@ package filipinofolklore;
 import java.util.Random;
 
 public class MonsterSkill {
+
     /*
      * This is the damage implementation:
      * Monsters from woods will deal normal damage and
      * Monsters from swamp and village will have different amplified damage
      */
 
+    private static Monster monster;
+    private static Player player;
+
+    public MonsterSkill() {
+    }
+
     // Swamps
     private static int siyokoyAttackCounter = 0;
     private static int berberokaAttackCounter = 0;
     private static int minokawaAttackCounter = 0;
 
+    public void identifySkill(int id, Monster mon, Player play) {
+        monster = mon;
+        player = play;
+
+        switch (id) {
+            case 11 ->
+                sigbinSkill();
+            case 12 -> kapreSkill();
+            case 21 -> berberokaSkill();
+            case 22 -> siyokoySkill();
+            case 23 -> santelmoSkill();
+            case 31 -> manananggalSkill();
+            case 32 -> tikbalangSkill();
+            case 33 -> tiyanakSkill();
+            case 34 -> bruhaSkill();
+        }
+    }
+
     // WOOD MONSTERS
-    public static void sigbinSkill(Monster monster, Player player) {
+    private  static void sigbinSkill() {
         int damage = monster.attack();
         player.takeDamage(damage);
         System.out.println(monster.getName() + " ran towards you and attacks you for " + damage + " damage!");
     }
 
-    public static void kapreSkill(Monster monster, Player player) {
+    private static void kapreSkill() {
         int damage = monster.attack();
         player.takeDamage(damage);
-        System.out.println(monster.getName() + " flew and attacks you for " + damage + " damage!");
+        System.out.println(monster.getName() + " smacks you for " + damage + " damage!");
     }
 
     // SWAMP MONSTERS
-    public static void berberokaSkill(Monster monster, Player player) {
+    private static void berberokaSkill() {
         // Berberoka will deal 1.5x the damage on the 3rd succeeding attack and resets
         // the counter.
         int damage;
@@ -45,7 +70,7 @@ public class MonsterSkill {
         System.out.println(monster.getName() + " attacks you for " + damage + " damage!");
     }
 
-    public static void siyokoySkill(Monster monster, Player player) {
+    private static void siyokoySkill() {
         // Once Siyokoy reaches his 3rd succeeding attack, Siyokoy will deal 2x the
         // damage from then on.
         int damage;
@@ -65,14 +90,14 @@ public class MonsterSkill {
         System.out.println(monster.getName() + " charges. It attacks you for " + damage + " damage!");
     }
 
-    public static void santelmoSkill(Monster monster, Player player) {
+    private static void santelmoSkill() {
         int baseDamage = monster.attack();
         int finalDamage = baseDamage;
         player.takeDamage(finalDamage);
     }
 
     // VILLAGE MONSTERS
-    public static void manananggalSkill(Monster monster, Player player) {
+    private static void manananggalSkill() {
         // Manananggal will heal itself for half the damage dealt
         int baseDamage = monster.attack();
         int finalDamage = baseDamage;
@@ -83,13 +108,13 @@ public class MonsterSkill {
         System.out.println(monster.getName() + " heals for " + (finalDamage / 2) + " HP.");
     }
 
-    public static void tikbalangSkill(Monster monster, Player player) {
+    private static void tikbalangSkill() {
         int baseDamage = monster.attack();
         int finalDamage = baseDamage;
         player.takeDamage(finalDamage);
     }
 
-    public static void tiyanakSkill(Monster monster, Player player) {
+    private static void tiyanakSkill() {
         /*
          * There is a 50% chance that the Tiyanak will deal
          * continuous attacks.
@@ -121,36 +146,31 @@ public class MonsterSkill {
 
     }
 
-    public static void bruhaSkill(Monster monster, Player player) {
+    private static void bruhaSkill() {
         int damage = monster.attack();
         player.takeDamage(damage);
         System.out.println(monster.getName() + " attacks you for " + damage + " damage!");
     }
 
     // Mountain Boss
-    public static void minokawaSkill(Monster monster, Player player) {
+    private static void minokawaSkill() {
         // Once Minokawa reaches his 5th succeeding attack, Minokawa will deal 2x the
         // damage from then on.
         int damage;
         double multiplier;
 
-        switch (minokawaAttackCounter) {
-            case 0:
-                multiplier = 1.0;
-                break;
-            case 1:
-                multiplier = 1.25;
-                break;
-            case 2:
-                multiplier = 1.5;
-                break;
-            case 3:
-                multiplier = 1.75;
-                break;
-            default:
-                multiplier = 2.0;
-                break;
-        }
+        multiplier = switch (minokawaAttackCounter) {
+            case 0 ->
+                1.0;
+            case 1 ->
+                1.25;
+            case 2 ->
+                1.5;
+            case 3 ->
+                1.75;
+            default ->
+                2.0;
+        };
 
         if (multiplier == 2.0) {
             System.out.println(monster.getName() + " unleashes a CHARGED attack!");
@@ -164,8 +184,8 @@ public class MonsterSkill {
     }
 
     // Ocean Boss
-    public static void bakunawaSkill(Monster monster, Player player) {
-        
+    private static void bakunawaSkill() {
+
         int damage = monster.attack();
         player.takeDamage(damage);
         System.out.println(monster.getName() + " attacks you for " + damage + " damage!");

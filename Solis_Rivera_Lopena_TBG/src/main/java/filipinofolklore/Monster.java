@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class Monster extends Character {
 
-    public Monster(String name, int health, int minATK, int maxATK, double speed) {
-        super(name, health, minATK, maxATK, speed);
+    private static final MonsterSkill monsterSkill = new MonsterSkill();
+
+    public Monster(String name, int health, int minATK, int maxATK, double speed, int id) {
+        super(name, health, minATK, maxATK, speed, id);
         this.name = super.name;
     }
 
@@ -30,20 +32,20 @@ public class Monster extends Character {
      */
 
     // WOODS
-    public static final Monster sigbin = new Monster("Sigbin", 100, 10, 20, 5);
-    public static final Monster kapre = new Monster("Kapre", 100, 20, 20, 5);
+    public static final Monster sigbin = new Monster("Sigbin", 100, 10, 20, 5, 11);
+    public static final Monster kapre = new Monster("Kapre", 100, 20, 20, 5, 12);
 
     // SWAMP
 
-    public static final Monster berberoka = new Monster("Berberoka", 150, 20, 30, 10);
-    public static final Monster siyokoy = new Monster("Siyokoy", 150, 20, 30, 10);
-    public static final Monster santelmo = new Monster("Santelmo", 150, 20, 30, 15);
+    public static final Monster berberoka = new Monster("Berberoka", 150, 20, 30, 10, 21);
+    public static final Monster siyokoy = new Monster("Siyokoy", 150, 20, 30, 10, 22);
+    public static final Monster santelmo = new Monster("Santelmo", 150, 20, 30, 15, 23);
 
     // VILLAGE
-    public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40,15);
-    public static final Monster tikbalang = new Monster("Tikbalang", 200, 30, 40, 15);
-    public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 20);
-    public static final Monster bruha = new Monster("Bruha", 200, 30, 40, 20);
+    public static final Monster manananggal = new Monster("Manananggal", 200, 30, 40,15, 31);
+    public static final Monster tikbalang = new Monster("Tikbalang", 200, 30, 40, 15, 32);
+    public static final Monster tiyanak = new Monster("Tiyanak", 200, 30, 40, 20, 33);
+    public static final Monster bruha = new Monster("Bruha", 200, 30, 40, 20, 34);
 
     // Like weaponSpawn in Player.java, each arraylist will have a spwan chances  
 
@@ -85,6 +87,10 @@ public class Monster extends Character {
 
     public String getName() {
         return super.getName();
+    }
+    
+    public void getSkill(Monster monster, Player player) {
+        monsterSkill.identifySkill(id, monster, player);
     }
 
 }

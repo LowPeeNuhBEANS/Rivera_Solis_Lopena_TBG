@@ -7,16 +7,12 @@ public class MainGame {
 
     private static final Random rand = new Random();
     private static Player player;
-    private static final Travel travel = new Travel();
+    private static Travel travel;
     private static final Scanner scn = new Scanner(System.in);
     private static final Colors color = new Colors();
     private static boolean inGame = true;
-    private static int playerHp = 100; // [TESTING FOR HEALTHBAR]
     private static String pName;
     private static boolean moved = false;
-
-    // COLORS [TESTING]
-
 
     public static void main(String[] args) {
         int choice = 0;
@@ -55,6 +51,7 @@ public class MainGame {
                         System.out.print("Enter your username: ");
                         pName = scn.nextLine();
                         player = new Player(pName);
+                        travel = new Travel();
                         gameStart();
                     }
                     scn.nextLine();
@@ -79,6 +76,9 @@ public class MainGame {
             if (moved) {
                 player.spawnWeapons(travel.getAreaCounter()); // Spawn weapon when moving tiles
                 monsterSpawned(); // Spawn Monster when moving tiles
+                if (inGame == false) {
+                    break;
+                }
                 moved = false;
             }
 

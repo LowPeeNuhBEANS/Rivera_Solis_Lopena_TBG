@@ -41,7 +41,7 @@ public class Player {
     }
 
     public void openInventory() {
-        health = inventory.showInventory(health);
+        health = inventory.showInventory(health, healthBar);
     }
 
     // To equip a new weapon, weaponHandler spawns a new weapon for the player
@@ -63,9 +63,8 @@ public class Player {
     public static void addItemToInventory(){ 
         
     }
-
-    // Player Health Bar
-    public void getPlayerHealthBar() {
+    //Player Health Bar
+    public void getPlayerHealthBar(){
         healthBar.displayHealth(health);
     }
 }

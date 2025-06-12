@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class Inventory {
 
-    private int maxHealth;
+    private final int maxHealth;
     private static int currentHealth;
     private static final Scanner scn = new Scanner(System.in); //Scanner for input
     private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); //Hashmap for Item Name and Health Points
@@ -34,8 +34,9 @@ public class Inventory {
 
     //Shows prompts to interact with inventory
     //When finished, returns with player's updated or same health.
-    public int showInventory(int playerHealth) {
+    public int showInventory(int playerHealth, HealthBar hpBar) {
         currentHealth = playerHealth;
+
         boolean inSako = true;
         while (inSako) {
 
@@ -65,7 +66,7 @@ public class Inventory {
                     String item = scn.next();
                     scn.nextLine();
                     System.out.println();
-                    use(readChoice(item));
+                    use(readChoice(item), hpBar);
                 }
                 case "back" ->
                     inSako = false;
@@ -91,7 +92,7 @@ public class Inventory {
         return itemName;
     }
 
-    //Check how much health the item will restore
+    //To check how much hp an item will restore, the hp point of an item is peeked and displayed.
     private void check(String itemName) {
         if (itemName == null) {
             System.out.println("Invalid item choice.");
@@ -106,20 +107,20 @@ public class Inventory {
         }
     }
 
-    //Uses item to heal player
-    private void use(String itemName) {
+    //To regain health, item hp are popped from stack and added to player's health
+    private void use(String itemName, HealthBar hpBar) {
         if (itemName == null) {
             System.out.println("Invalid item choice.");
             return;
         }
-        
+
         if (currentHealth == maxHealth) {
             System.out.println("Cannot consume. You are at full heath!");
             return;
         }
-        
+
         Stack<Integer> food = items.get(itemName);
-        
+
         if (food != null && !food.isEmpty()) {
             System.out.println(capitalize(itemName) + " consumed! You restored " + food.peek() + " health.");
             currentHealth += food.pop();
@@ -127,12 +128,15 @@ public class Inventory {
             if (currentHealth > maxHealth) {
                 currentHealth = maxHealth;
             }
+            System.out.print("Your health is now at " + currentHealth);
+            hpBar.displayHealth(currentHealth);
 
         } else {
             System.out.println("No more " + capitalize(itemName) + " left!");
         }
     }
 
+    //To show item names, the first letter of the key name is capitalized.
     private String capitalize(String name) {
         return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
