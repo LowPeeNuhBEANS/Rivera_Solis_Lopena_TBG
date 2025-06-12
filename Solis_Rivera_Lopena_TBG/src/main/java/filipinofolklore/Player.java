@@ -40,8 +40,8 @@ public class Player {
         health -= damage;
     }
 
-    public void openInventory() {
-        health = inventory.showInventory(health, healthBar);
+    public void openInventory(boolean inBattle) {
+        health = inventory.showInventory(health, healthBar, inBattle);
     }
 
     // To equip a new weapon, weaponHandler spawns a new weapon for the player

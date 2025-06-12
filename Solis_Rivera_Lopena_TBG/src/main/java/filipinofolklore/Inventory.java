@@ -36,7 +36,7 @@ public class Inventory {
 
     //Shows prompts to interact with inventory
     //When finished, returns with player's updated or same health.
-    public int showInventory(int playerHealth, HealthBar hpBar) {
+    public int showInventory(int playerHealth, HealthBar hpBar, boolean inBattle) {
         currentHealth = playerHealth;
 
         boolean inSako = true;
@@ -69,6 +69,10 @@ public class Inventory {
                     scn.nextLine();
                     System.out.println();
                     use(readChoice(item), hpBar);
+
+                    if (inBattle) {
+                        inSako = false;
+                    }
                 }
                 case "back" ->
                     inSako = false;

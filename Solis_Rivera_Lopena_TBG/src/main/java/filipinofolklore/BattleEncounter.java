@@ -56,6 +56,7 @@ public class BattleEncounter {
                             validInput = true;
                         }
                         case "sako" -> {
+                            player.openInventory(true);
                             validInput = true;
                         }
                         case "parry" -> {

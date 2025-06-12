@@ -102,7 +102,7 @@ public class MainGame {
                     moved = true;
                 }
                 case "sako" ->
-                    player.openInventory();
+                    player.openInventory(false);
                 case "exit" ->
                     inGame = false;
                 default -> {
