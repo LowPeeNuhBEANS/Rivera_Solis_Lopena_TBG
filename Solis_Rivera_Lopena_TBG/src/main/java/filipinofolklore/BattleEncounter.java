@@ -132,6 +132,7 @@ public class BattleEncounter {
 
         if (player.isAlive()) {
             System.out.println("You defeated " + monster.getName() + "!");
+            player.lootBody(monster.getName());
             return true;
         } else {
             System.out.println("You were defeated by " + monster.getName() + "...");

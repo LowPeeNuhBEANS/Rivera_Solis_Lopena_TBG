@@ -59,9 +59,8 @@ public class Player {
         return equipped.getName();
     }    
 
-    //Add item to inventory test environment
-    public static void addItemToInventory(){ 
-        
+    public void lootBody(String monsterName){ 
+        inventory.spawnLoot(monsterName);
     }
     //Player Health Bar
     public void getPlayerHealthBar(){

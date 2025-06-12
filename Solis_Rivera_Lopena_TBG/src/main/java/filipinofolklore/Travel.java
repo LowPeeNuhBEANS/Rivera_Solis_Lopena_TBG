@@ -110,4 +110,9 @@ public class Travel {
             tileCounter = 0;
         }
     }
+
+    public void resetCounter() {
+        areaCounter = 0;
+        tileCounter = 0;
+    }
 }

@@ -1,6 +1,7 @@
 package filipinofolklore;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -8,6 +9,7 @@ public class Inventory {
 
     private final int maxHealth;
     private static int currentHealth;
+    private static final Random randomNum = new Random();
     private static final Scanner scn = new Scanner(System.in); //Scanner for input
     private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); //Hashmap for Item Name and Health Points
 
@@ -19,10 +21,10 @@ public class Inventory {
     //Inserts all items to the HashMap when inventory is initialized
     private void initializeItems() {
         items.put("suman", createStack(20));
-        items.put("maruya", createStack(10));
-        items.put("bingka", createStack(15));
-        items.put("panyawan", createStack(45));
-        items.put("gabon", createStack(50));
+        items.put("maruya", createStack(30));
+        items.put("bingka", createStack(40));
+        items.put("turon", createStack(50));
+        items.put("atis", createStack(60));
     }
 
     //Creates stacks automatically, pushes the passed integer
@@ -85,8 +87,8 @@ public class Inventory {
         if (choice.equalsIgnoreCase("suman")
                 || choice.equalsIgnoreCase("maruya")
                 || choice.equalsIgnoreCase("bingka")
-                || choice.equalsIgnoreCase("panyawan")
-                || choice.equalsIgnoreCase("gabon")) {
+                || choice.equalsIgnoreCase("turon")
+                || choice.equalsIgnoreCase("atis")) {
             itemName = choice.toLowerCase();
         }
         return itemName;
@@ -133,6 +135,46 @@ public class Inventory {
 
         } else {
             System.out.println("No more " + capitalize(itemName) + " left!");
+        }
+    }
+
+    public void spawnLoot(String monsterName) {
+        if (randomNum.nextDouble() > 0.2) { //80% chance to get an item
+            int lootSpawn = randomNum.nextInt(5);
+
+            String randomItem = null;
+            int itemHp = 0;
+            switch (lootSpawn) {
+                case 0 -> {
+                    randomItem = "suman";
+                    itemHp = 20;
+                }
+                case 1 -> {
+                    randomItem = "maruya";
+                    itemHp = 30;
+                }
+                case 2 -> {
+                    randomItem = "bingka";
+                    itemHp = 40;
+                }
+                case 3 -> {
+                    randomItem = "turon";
+                    itemHp = 50;
+                }
+                case 4 -> {
+                    randomItem = "atis";
+                    itemHp = 60;
+                }
+            }
+
+            System.out.println("\nThe " + monsterName + " dropped one " + randomItem + ". ");
+            if (items.get(randomItem).size() >= 5) {
+                System.out.print("Unfortunately, your sako cannot hold any more " + randomItem + ".");
+                return;
+            }
+            
+            System.out.print(capitalize(randomItem) + " was added to your sako!");
+            items.get(randomItem).push(itemHp);
         }
     }
 

@@ -7,7 +7,7 @@ public class MainGame {
 
     private static final Random rand = new Random();
     private static Player player;
-    private static Travel travel;
+    private static final Travel travel = new Travel();;
     private static final Scanner scn = new Scanner(System.in);
     private static final Colors color = new Colors();
     private static boolean inGame = true;
@@ -18,6 +18,7 @@ public class MainGame {
         int choice = 0;
 
         while (true) {
+            
             System.out.println(color.red() + "================================");
             System.out.println("||                            ||");
             System.out.println("||                            ||");
@@ -31,7 +32,6 @@ public class MainGame {
             while (true) {
                 System.out.print(color.reset() + "\nEnter your choice: ");
                 String input = scn.nextLine();
-
                 try {
                     choice = Integer.parseInt(input);
                     break;
@@ -51,7 +51,6 @@ public class MainGame {
                         System.out.print("Enter your username: ");
                         pName = scn.nextLine();
                         player = new Player(pName);
-                        travel = new Travel();
                         gameStart();
                     }
                     scn.nextLine();
@@ -76,7 +75,9 @@ public class MainGame {
             if (moved) {
                 player.spawnWeapons(travel.getAreaCounter()); // Spawn weapon when moving tiles
                 monsterSpawned(); // Spawn Monster when moving tiles
+                //Ends the game when player dies.
                 if (inGame == false) {
+                    travel.resetCounter();
                     break;
                 }
                 moved = false;
