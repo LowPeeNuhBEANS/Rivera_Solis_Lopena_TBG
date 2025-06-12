@@ -6,16 +6,16 @@ import java.util.Scanner;
 public class MainGame {
 
     private static final Random rand = new Random();
-    private static final Player player = new Player();
+    private static Player player;
     private static final Travel travel = new Travel();
     private static final Scanner scn = new Scanner(System.in);
     private static final Colors color = new Colors();
     private static boolean inGame = true;
-    private static int playerHp = 100; //[TESTING FOR HEALTHBAR]
+    private static int playerHp = 100; // [TESTING FOR HEALTHBAR]
     private static String pName;
     private static boolean moved = false;
 
-    //COLORS [TESTING]
+    // COLORS [TESTING]
 
 
     public static void main(String[] args) {
@@ -54,6 +54,7 @@ public class MainGame {
                         System.out.println("\n-*-*-*-*-GAME START-*-*-*-*-");
                         System.out.print("Enter your username: ");
                         pName = scn.nextLine();
+                        player = new Player(pName);
                         gameStart();
                     }
                     scn.nextLine();
@@ -76,8 +77,8 @@ public class MainGame {
             System.out.println(travel.getAreaMessage() + travel.tileCheck() + "");
 
             if (moved) {
-                player.spawnWeapons(travel.getAreaCounter()); //Spawn weapon when moving tiles
-                monsterSpawned(); //Spawn Monster when moving tiles
+                player.spawnWeapons(travel.getAreaCounter()); // Spawn weapon when moving tiles
+                monsterSpawned(); // Spawn Monster when moving tiles
                 moved = false;
             }
 
@@ -107,14 +108,14 @@ public class MainGame {
         }
     }
 
-    //Function to randomly spawn random monster from specific area
+    // Function to randomly spawn random monster from specific area
     private static void monsterSpawned() {
-        //1 in 3 chance for monster to spawn.
-        if (rand.nextInt(3) > 0) { //When 0 is generated, monster will be spawned.
+        // 1 in 3 chance for monster to spawn.
+        if (rand.nextInt(3) > 0) { // When 0 is generated, monster will be spawned.
             return;
         }
 
-        //randomly picks monster and starts battle
+        // randomly picks monster and starts battle
         switch (travel.getAreaCounter()) {
             case 1 -> {
                 if (!Monster.woodMonsters.isEmpty()) {
@@ -150,11 +151,11 @@ public class MainGame {
         }
     }
 
-    //Function to start battle with monster as parameter
+    // Function to start battle with monster as parameter
     private static void startBattle(Monster monster) {
         System.out.println("\n" + monster.getName() + " appeared!");
         BattleEncounter battle = new BattleEncounter(player, monster, travel);
-        battle.startBattle();
+        inGame = battle.startBattle();
     }
 
     private static void checkBoss() {
@@ -176,11 +177,12 @@ public class MainGame {
                         choosing = false;
                         System.out.println(
                                 "\"You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\\n"
-                                + //
-                                "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
-                                + //
-                                "Exhausted but determined, you brandish your weapom.\"");
+                                        + //
+                                        "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
+                                        + //
+                                        "Exhausted but determined, you brandish your weapom.\"");
                         // INSERT OPTIONAL BOSS BATTLE
+
                         goHome();
                     }
                     case "no" -> {
@@ -198,6 +200,10 @@ public class MainGame {
         System.out.println("You went home.");
         inGame = false;
 
-//END OF CLASS    
     }
+
+    public static String getName() {
+        return pName;
+    }
+    // END OF CLASS
 }
