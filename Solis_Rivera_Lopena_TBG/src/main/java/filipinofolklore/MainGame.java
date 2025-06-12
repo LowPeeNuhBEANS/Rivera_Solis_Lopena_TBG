@@ -1,5 +1,6 @@
 package filipinofolklore;
 
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -7,6 +8,7 @@ public class MainGame {
 
     private static final Random rand = new Random();
     private static Player player;
+    private static MonsterHandler monsterHandler;
     private static final Travel travel = new Travel();;
     private static final Scanner scn = new Scanner(System.in);
     private static final Colors color = new Colors();
@@ -51,6 +53,7 @@ public class MainGame {
                         System.out.print("Enter your username: ");
                         pName = scn.nextLine();
                         player = new Player(pName);
+                        monsterHandler = new MonsterHandler();
                         gameStart();
                     }
                     scn.nextLine();
@@ -111,43 +114,19 @@ public class MainGame {
 
     // Function to randomly spawn random monster from specific area
     private static void monsterSpawned() {
+        ArrayList<Monster> spawnTable = monsterHandler.getSpawnPool(travel.getAreaCounter());
+        
         // 1 in 3 chance for monster to spawn.
         if (rand.nextInt(3) > 0) { // When 0 is generated, monster will be spawned.
             return;
         }
 
         // randomly picks monster and starts battle
-        switch (travel.getAreaCounter()) {
-            case 1 -> {
-                if (!Monster.woodMonsters.isEmpty()) {
-                    Monster woodsMon = Monster.woodMonsters.get(rand.nextInt(Monster.woodMonsters.size())); // Woods
-                    startBattle(woodsMon);
-                    if (!woodsMon.isAlive()) {
-                        Monster.woodMonsters.remove(woodsMon);
-                    }
-                }
-            }
-            case 2 -> {
-                if (!Monster.swampMonsters.isEmpty()) {
-                    Monster swampMon = Monster.swampMonsters.get(rand.nextInt(Monster.swampMonsters.size())); // Swamp
-                    startBattle(swampMon);
-                    if (!swampMon.isAlive()) {
-                        Monster.swampMonsters.remove(swampMon);
-                    }
-                }
-            }
-
-            case 3 -> {
-                if (!Monster.villageMonsters.isEmpty()) {
-                    Monster villageMon = Monster.villageMonsters.get(rand.nextInt(Monster.villageMonsters.size())); // Village
-                    startBattle(villageMon);
-                    if (!villageMon.isAlive()) {
-                        Monster.villageMonsters.remove(villageMon);
-                    }
-                }
-            }
-            default -> {
-                // no monster encounter for other areas
+        if (!spawnTable.isEmpty()) {
+            Monster monster = spawnTable.get(rand.nextInt(spawnTable.size())); 
+            startBattle(monster);
+            if (!monster.isAlive()) {
+                spawnTable.remove(monster);
             }
         }
     }
