@@ -9,7 +9,8 @@ public class MainGame {
     private static final Random rand = new Random();
     private static Player player;
     private static MonsterHandler monsterHandler;
-    private static final Travel travel = new Travel();;
+    private static final Travel travel = new Travel();
+    ;
     private static final Scanner scn = new Scanner(System.in);
     private static final Colors color = new Colors();
     private static boolean inGame = true;
@@ -20,7 +21,7 @@ public class MainGame {
         int choice = 0;
 
         while (true) {
-            
+
             System.out.println(color.red() + "================================");
             System.out.println("||                            ||");
             System.out.println("||                            ||");
@@ -101,8 +102,10 @@ public class MainGame {
                     checkBoss();
                     moved = true;
                 }
-                case "sako" ->
+                case "sako" -> {
                     player.openInventory(false);
+                    System.out.println("");
+                }
                 case "exit" ->
                     inGame = false;
                 default -> {
@@ -115,7 +118,7 @@ public class MainGame {
     // Function to randomly spawn random monster from specific area
     private static void monsterSpawned() {
         ArrayList<Monster> spawnTable = monsterHandler.getSpawnPool(travel.getAreaCounter());
-        
+
         // 1 in 3 chance for monster to spawn.
         if (rand.nextInt(3) > 0) { // When 0 is generated, monster will be spawned.
             return;
@@ -123,7 +126,7 @@ public class MainGame {
 
         // randomly picks monster and starts battle
         if (!spawnTable.isEmpty()) {
-            Monster monster = spawnTable.get(rand.nextInt(spawnTable.size())); 
+            Monster monster = spawnTable.get(rand.nextInt(spawnTable.size()));
             startBattle(monster);
             if (!monster.isAlive()) {
                 spawnTable.remove(monster);
@@ -157,10 +160,10 @@ public class MainGame {
                         choosing = false;
                         System.out.println(
                                 "\"You stare into the murky waters of the ocean, giant glowing eyes stare right back into your soul.\\n"
-                                        + //
-                                        "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
-                                        + //
-                                        "Exhausted but determined, you brandish your weapom.\"");
+                                + //
+                                "The horrendous creature from the depths breaches the water's surface and stands face to face with you.\\n"
+                                + //
+                                "Exhausted but determined, you brandish your weapom.\"");
                         // INSERT OPTIONAL BOSS BATTLE
 
                         goHome();
