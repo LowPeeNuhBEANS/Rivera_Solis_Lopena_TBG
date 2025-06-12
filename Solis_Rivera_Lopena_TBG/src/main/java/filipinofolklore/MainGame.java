@@ -9,45 +9,38 @@ public class MainGame {
     private static final Player player = new Player();
     private static final Travel travel = new Travel();
     private static final Scanner scn = new Scanner(System.in);
+    private static final Colors color = new Colors();
     private static boolean inGame = true;
     private static int playerHp = 100; //[TESTING FOR HEALTHBAR]
     private static String pName;
     private static boolean moved = false;
 
     //COLORS [TESTING]
-    public static final String RESET = "\u001B[0m";
-    public static final String BLACK = "\u001B[30m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String PINK = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
+
 
     public static void main(String[] args) {
         int choice = 0;
 
         while (true) {
-            System.out.println(RED + "================================");
+            System.out.println(color.red() + "================================");
             System.out.println("||                            ||");
             System.out.println("||                            ||");
             System.out.println("||       Seek ye Horror       ||");
             System.out.println("||                            ||");
             System.out.println("||                            ||");
             System.out.println("================================");
-            System.out.println(GREEN + "1. Start Game");
-            System.out.println(RED + "2. Exit Game");
+            System.out.println(color.green() + "1. Start Game");
+            System.out.println(color.red() + "2. Exit Game");
 
             while (true) {
-                System.out.print(RESET + "\nEnter your choice: ");
+                System.out.print(color.reset() + "\nEnter your choice: ");
                 String input = scn.nextLine();
 
                 try {
                     choice = Integer.parseInt(input);
                     break;
                 } catch (NumberFormatException e) {
-                    System.out.println(RED + "Invalid choice, try again.");
+                    System.out.println(color.red() + "Invalid choice, try again.");
                     scn.nextLine();
                 }
             }
@@ -66,11 +59,11 @@ public class MainGame {
                     scn.nextLine();
                 }
                 case 2 -> {
-                    System.out.println(PINK + "Exiting game... Goodbye!");
+                    System.out.println(color.pink() + "Exiting game... Goodbye!");
                     return;
                 }
                 default -> {
-                    System.out.println(RED + "Invalid choice, try again.");
+                    System.out.println(color.red() + "Invalid choice, try again.");
                 }
             }
         }
@@ -91,9 +84,9 @@ public class MainGame {
             System.out.println("");
             System.out.println("What would you like to do right now?");
             System.out.println("");
-            System.out.print(CYAN + pName + " HP: " + GREEN);
+            System.out.print(color.cyan() + pName + " HP: " + color.green());
             player.getPlayerHealthBar();
-            System.out.println(RESET + "||" + GREEN + " Walk " + RESET + "||" + YELLOW + " Sako (Check Inventory) " + RESET + "||" + RED + " Exit (Main Menu)" + RESET + " ||");
+            System.out.println(color.reset() + "||" + color.green() + " Walk " + color.reset() + "||" + color.yellow() + " Sako (Check Inventory) " + color.reset() + "||" + color.red() + " Exit (Main Menu)" + color.reset() + " ||");
             System.out.print("> ");
             String action = scn.next();
 

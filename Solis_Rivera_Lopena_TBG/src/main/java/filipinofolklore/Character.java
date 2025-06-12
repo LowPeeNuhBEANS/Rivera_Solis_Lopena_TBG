@@ -9,7 +9,7 @@ public class Character {
     protected int minATK;
     protected int maxATK;
     protected double speed;
-    private HealthBar healthBar;
+    private final HealthBar healthBar;
 
     public Character(String name, int health, int minATK, int maxATK, double speed) {
         this.name = name;
@@ -58,6 +58,6 @@ public class Character {
     }
 
     public void getHealthBar() {
-        healthBar.displayHealth();
+        healthBar.displayHealth(health);
     }
 }

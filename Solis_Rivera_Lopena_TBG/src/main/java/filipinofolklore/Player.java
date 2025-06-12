@@ -7,9 +7,9 @@ public class Player {
     int health = 100;
 
     private final WeaponHandler weaponHandler = new WeaponHandler();
-    private final Inventory inventory = new Inventory();
+    private final Inventory inventory = new Inventory(health);
     private static Weapon equipped = new Weapon("Stick", 5, 20, 20);
-    private HealthBar healthBar = new HealthBar(health);
+    private final HealthBar healthBar = new HealthBar(health);
 
     public Player() {
 
@@ -27,13 +27,12 @@ public class Player {
         return atkDmg;
     }
 
-
     public void takeDamage(int damage) {
         health -= damage;
     }
 
     public void openInventory() {
-        inventory.showInventory(health);
+        health = inventory.showInventory(health);
     }
 
     //To equip a new weapon, weaponHandler spawns a new weapon for the player
@@ -56,8 +55,6 @@ public class Player {
     }
     //Player Health Bar
     public void getPlayerHealthBar(){
-        healthBar.displayHealth();
+        healthBar.displayHealth(health);
     }
 }
-
-//END OF CLASS    

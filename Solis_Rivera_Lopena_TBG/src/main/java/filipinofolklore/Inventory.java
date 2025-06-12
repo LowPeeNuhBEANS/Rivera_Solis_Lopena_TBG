@@ -6,13 +6,14 @@ import java.util.Stack;
 
 public class Inventory {
 
-    private static int maxHealth;
+    private int maxHealth;
     private static int currentHealth;
     private static final Scanner scn = new Scanner(System.in); //Scanner for input
     private static final HashMap<String, Stack<Integer>> items = new HashMap<>(); //Hashmap for Item Name and Health Points
 
-    public Inventory() {
+    public Inventory(int maxHealth) {
         initializeItems();
+        this.maxHealth = maxHealth;
     }
 
     //Inserts all items to the HashMap when inventory is initialized
@@ -32,7 +33,8 @@ public class Inventory {
     }
 
     //Shows prompts to interact with inventory
-    public void showInventory(int playerHealth) {
+    //When finished, returns with player's updated or same health.
+    public int showInventory(int playerHealth) {
         currentHealth = playerHealth;
         boolean inSako = true;
         while (inSako) {
@@ -72,19 +74,20 @@ public class Inventory {
                 }
             }
         }
+        return currentHealth;
     }
 
-    //Checks if user's choice matches with a key
+    //Checks if user's choice matches with a key to avoid exceptions
     private String readChoice(String choice) {
         String itemName = null;
 
-        if (choice.equalsIgnoreCase("suman") ||
-            choice.equalsIgnoreCase("maruya") ||
-            choice.equalsIgnoreCase("bingka") ||
-            choice.equalsIgnoreCase("panyawan") ||
-            choice.equalsIgnoreCase("gabon")) {
-                itemName = choice.toLowerCase();
-            }
+        if (choice.equalsIgnoreCase("suman")
+                || choice.equalsIgnoreCase("maruya")
+                || choice.equalsIgnoreCase("bingka")
+                || choice.equalsIgnoreCase("panyawan")
+                || choice.equalsIgnoreCase("gabon")) {
+            itemName = choice.toLowerCase();
+        }
         return itemName;
     }
 
@@ -103,23 +106,34 @@ public class Inventory {
         }
     }
 
-    //Use item to regain health
+    //Uses item to heal player
     private void use(String itemName) {
         if (itemName == null) {
             System.out.println("Invalid item choice.");
             return;
         }
-
+        
+        if (currentHealth == maxHealth) {
+            System.out.println("Cannot consume. You are at full heath!");
+            return;
+        }
+        
         Stack<Integer> food = items.get(itemName);
+        
         if (food != null && !food.isEmpty()) {
             System.out.println(capitalize(itemName) + " consumed! You restored " + food.peek() + " health.");
             currentHealth += food.pop();
+
+            if (currentHealth > maxHealth) {
+                currentHealth = maxHealth;
+            }
+
         } else {
             System.out.println("No more " + capitalize(itemName) + " left!");
         }
     }
 
     private String capitalize(String name) {
-        return name.substring(0,1).toUpperCase() + name.substring(1);
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 }
